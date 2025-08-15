@@ -704,6 +704,56 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
         logEvent('ERROR', 'Pulsante add-to-playlist non trovato nel DOM');
     }
+
+    // === Equalizzatore: apertura/chiusura pannello ===
+    const eqButton = document.getElementById('equalizer-button');
+    const eqPanel = document.getElementById('equalizer-panel');
+    const eqCloseBtn = document.getElementById('eq-close-btn');
+
+    if (eqButton && eqPanel) {
+        // Apri/chiudi al click sul pulsante
+        eqButton.addEventListener('click', (e) => {
+            e.stopPropagation(); // evita che il click si propagh i al documento
+            const isShown = eqPanel.classList.toggle('show');
+            eqButton.classList.toggle('active', isShown);
+            logEvent('UI', `Equalizzatore ${isShown ? 'aperto' : 'chiuso'}`);
+        });
+
+        // Chiudi con il bottone X se presente
+        if (eqCloseBtn) {
+            eqCloseBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                eqPanel.classList.remove('show');
+                eqButton.classList.remove('active');
+                logEvent('UI', 'Equalizzatore chiuso (X)');
+            });
+        }
+
+        // Click fuori dal pannello lo chiude
+        document.addEventListener('click', (event) => {
+            if (!eqPanel.classList.contains('show')) return;
+            const target = event.target;
+            if (target === eqButton || eqButton.contains(target)) return;
+            if (eqPanel.contains(target)) return;
+
+            eqPanel.classList.remove('show');
+            eqButton.classList.remove('active');
+            logEvent('UI', 'Equalizzatore chiuso (click fuori)');
+        });
+
+        // Chiudi con Escape
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && eqPanel.classList.contains('show')) {
+                eqPanel.classList.remove('show');
+                eqButton.classList.remove('active');
+                logEvent('UI', 'Equalizzatore chiuso (Escape)');
+            }
+        });
+
+        logEvent('SUCCESS', 'Event listener equalizzatore configurati');
+    } else {
+        logEvent('INFO', 'Equalizzatore non presente nel DOM (button/panel mancanti)');
+    }
 });
 
 // Mappa delle durate delle tracce (secondi) per ogni file audio
