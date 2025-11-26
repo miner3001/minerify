@@ -89,7 +89,7 @@ header h1 {
 
 .album-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adatta dinamicamente le colonne */
+    grid-template-columns: repeat(7, 1fr); /* 7 album per riga fisse */
     gap: 20px;
     margin-top: 30px;
     width: 90%; /* Ridimensiona per schermi più piccoli */
@@ -1542,5 +1542,228 @@ input:checked + .slider:before {
     .knob {
         width: 60px;
         height: 60px;
+    }
+
+    /* Header responsive */
+    header h1 {
+        font-size: 2em;
+    }
+
+    /* Discover section responsive */
+    .discover-section h2 {
+        font-size: 1.8em;
+    }
+
+    .discover-section p {
+        font-size: 0.9em;
+    }
+
+    /* Album container responsive */
+    .album-container {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 15px;
+        width: 95%;
+    }
+
+    .album-card {
+        padding: 15px;
+    }
+
+    .album-card h3 {
+        font-size: 1.2em;
+    }
+
+    /* Search container responsive */
+    .search-container {
+        width: 90%;
+    }
+
+    #search-bar {
+        font-size: 14px;
+        padding: 10px 15px;
+    }
+
+    /* Player bar responsive - Stile Spotify mobile */
+    .player-bar {
+        padding: 10px 12px;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        height: auto;
+        gap: 10px;
+    }
+
+    /* Info canzone a sinistra */
+    .player-info {
+        flex: 1;
+        min-width: 0;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .album-cover {
+        width: 45px;
+        height: 45px;
+        flex-shrink: 0;
+    }
+
+    .song-details {
+        flex: 1;
+        min-width: 0;
+        overflow: hidden;
+    }
+
+    .song-details p {
+        font-size: 0.85em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    /* Nasconde tutti i controlli tranne play/pause */
+    .player-controls {
+        display: flex !important;
+        flex: 0 0 auto;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 0;
+    }
+
+    .player-controls button {
+        display: none !important;
+    }
+
+    /* Mostra solo il pulsante play/pause a destra */
+    .player-controls #play-pause {
+        display: block !important;
+        font-size: 1.8em;
+        padding: 5px;
+        margin: 0;
+    }
+
+    /* Progress bar sotto, full width */
+    #progress-bar {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        margin: 0;
+        height: 3px;
+        border-radius: 0;
+    }
+
+    /* Nasconde i tempi su mobile */
+    #current-time, #total-duration {
+        display: none !important;
+    }
+
+    /* Nasconde completamente volume controls */
+    .volume-controls {
+        display: none !important;
+    }
+
+    /* Overlay responsive */
+    .overlay-content {
+        width: 90%;
+        padding: 15px;
+    }
+
+    .album-details {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .album-details img {
+        margin-bottom: 15px;
+    }
+
+    /* Listen now button responsive */
+    .listen-now {
+        padding: 10px 20px;
+        font-size: 0.9em;
+    }
+
+    .listen-now-main {
+        padding: 12px 25px;
+        font-size: 1em;
+    }
+}
+
+/* Tablet responsive */
+@media (min-width: 769px) and (max-width: 1024px) {
+    header h1 {
+        font-size: 2.5em;
+    }
+
+    .discover-section h2 {
+        font-size: 2.2em;
+    }
+
+    .nav a {
+        margin: 0 15px;
+        font-size: 1.1em;
+    }
+
+    #progress-bar {
+        width: 250px;
+    }
+
+    .player-bar {
+        padding: 10px 15px;
+    }
+}
+
+/* Large screens */
+@media (min-width: 1400px) {
+    .discover-section h2 {
+        font-size: 3em;
+    }
+
+    header h1 {
+        font-size: 3.5em;
+    }
+}
+
+/* Small mobile devices */
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 1.5em;
+    }
+
+    .discover-section h2 {
+        font-size: 1.5em;
+    }
+
+    .album-container {
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+        gap: 10px;
+    }
+
+    .album-card {
+        padding: 10px;
+    }
+
+    .album-card h3 {
+        font-size: 1em;
+    }
+
+    .player-controls button {
+        font-size: 1em;
+        padding: 6px;
+        margin: 0 3px;
+    }
+
+    .listen-now {
+        padding: 8px 15px;
+        font-size: 0.8em;
+    }
+
+    .nav a {
+        font-size: 1.3em;
+    }
+
+    #search-bar {
+        font-size: 13px;
+        padding: 8px 12px;
     }
 }
