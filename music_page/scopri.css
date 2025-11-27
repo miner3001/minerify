@@ -3,22 +3,32 @@ body {
     background-color: #000000;
     color: #fff;
     margin: 0;
-    padding: 0;/* Rimuove entrambe le barre di scorrimento */
-    height: auto; /* Permette al contenuto di adattarsi all'altezza */
+    padding: 0;
+    padding-bottom: 90px; /* spazio per la player bar fissa */
+    /* Rimuove entrambe le barre di scorrimento */
+    height: auto;
+    /* Permette al contenuto di adattarsi all'altezza */
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    scroll-behavior: smooth; /* Aggiunge uno scorrimento fluido */
-    overflow-x: hidden; /* Blocca lo scroll orizzontale */
-    overflow-y: auto; /* Consente lo scroll verticale */
-    scrollbar-width: none; /* Nasconde la scrollbar in Firefox */
-    -ms-overflow-style: none; /* Nasconde la scrollbar in IE/Edge */
+    scroll-behavior: smooth;
+    /* Aggiunge uno scorrimento fluido */
+    overflow-x: hidden;
+    /* Blocca lo scroll orizzontale */
+    overflow-y: auto;
+    /* Consente lo scroll verticale */
+    scrollbar-width: none;
+    /* Nasconde la scrollbar in Firefox */
+    -ms-overflow-style: none;
+    /* Nasconde la scrollbar in IE/Edge */
     width: 100%;
-    min-height: 100vh; /* Cambiato da height a min-height per permettere il contenuto di espandersi */
-    position: relative; /* Necessario per posizionare gli elementi figli */
-    
-    
+    min-height: 100vh;
+    /* Cambiato da height a min-height per permettere il contenuto di espandersi */
+    position: relative;
+    /* Necessario per posizionare gli elementi figli */
+
+
 }
 
 body.dark-theme {
@@ -69,13 +79,17 @@ header h1 {
     width: 100%;
     box-sizing: border-box;
     transition: margin-top 0.3s;
-    margin-top: 0; /* Elimina lo spazio sopra il testo "Scopri nuova musica" */
-    padding-bottom: 120px; /* Aggiunge spazio in fondo per la playbar */
-    overflow-y: visible; /* Rimuove il controllo scroll dal container */
+    margin-top: 0;
+    /* Elimina lo spazio sopra il testo "Scopri nuova musica" */
+    padding-bottom: 120px;
+    /* Aggiunge spazio in fondo per la playbar */
+    overflow-y: visible;
+    /* Rimuove il controllo scroll dal container */
 }
 
 .discover-section.hidden {
-    margin-top: 50px; /* Aumenta lo spazio quando si effettua una ricerca */
+    margin-top: 50px;
+    /* Aumenta lo spazio quando si effettua una ricerca */
 }
 
 .discover-section::-webkit-scrollbar {
@@ -89,10 +103,12 @@ header h1 {
 
 .album-container {
     display: grid;
-    grid-template-columns: repeat(7, 1fr); /* 7 album per riga fisse */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    /* Adatta dinamicamente le colonne */
     gap: 20px;
     margin-top: 30px;
-    width: 90%; /* Ridimensiona per schermi più piccoli */
+    width: 90%;
+    /* Ridimensiona per schermi più piccoli */
     margin: 30px auto;
 }
 
@@ -113,7 +129,7 @@ header h1 {
     background-color: rgba(0, 0, 0, 0.3);
     border-color: rgba(0, 122, 204, 0.8);
     box-shadow: 0 0 20px rgba(0, 122, 204, 0.4),
-                inset 0 0 15px rgba(0, 122, 204, 0.2);
+        inset 0 0 15px rgba(0, 122, 204, 0.2);
 }
 
 .album-card img {
@@ -130,18 +146,21 @@ header h1 {
 .album-card h3 {
     margin-top: 10px;
     font-size: 1.5em;
-    color: #007acc; /* Colore normale bianco */
-    text-shadow: none; /* Rimuove il glow iniziale */
+    color: #007acc;
+    /* Colore normale bianco */
+    text-shadow: none;
+    /* Rimuove il glow iniziale */
     transition: all 0.3s ease;
     user-select: none;
     cursor: default;
 }
 
 .album-card:hover h3 {
-    color: #007acc; /* Diventa blu all'hover */
-    text-shadow: 0 0 10px #007acc, 
-                 0 0 20px #007acc, 
-                 0 0 30px #007acc;
+    color: #007acc;
+    /* Diventa blu all'hover */
+    text-shadow: 0 0 10px #007acc,
+        0 0 20px #007acc,
+        0 0 30px #007acc;
 }
 
 /* Aggiorna lo stile dei bottoni nelle card */
@@ -237,16 +256,20 @@ header h1 {
     from {
         transform: translateY(0);
     }
+
     to {
         transform: translateY(-100%);
     }
 }
 
 @keyframes twinkle {
-    0%, 100% {
+
+    0%,
+    100% {
         opacity: 0.3;
         transform: scale(0.8);
     }
+
     50% {
         opacity: 1;
         transform: scale(1);
@@ -270,8 +293,8 @@ header h1 {
 }
 
 /* Migliora la leggibilità dei controlli nella playbar */
-.player-controls button, 
-.song-details p, 
+.player-controls button,
+.song-details p,
 #current-song,
 #current-artist {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
@@ -328,11 +351,14 @@ player-controls {
 }
 
 .player-controls button:hover {
-    color: #007acc; /* Colore blu al passaggio del mouse */
+    color: #007acc;
+    /* Colore blu al passaggio del mouse */
 }
 
-#shuffle.active, #loop.active {
-    color: #007acc; /* Colore blu quando attivo */
+#shuffle.active,
+#loop.active {
+    color: #007acc;
+    /* Colore blu quando attivo */
 }
 
 #progress-bar {
@@ -406,7 +432,8 @@ player-controls {
     transition: background 0.3s;
 }
 
-#current-time, #total-duration {
+#current-time,
+#total-duration {
     color: #b3b3b3;
     font-size: 0.9em;
     margin: 0 10px;
@@ -473,16 +500,22 @@ player-controls {
 .album-info h2 {
     font-size: 1.8em;
     margin: 0;
-    color: #007acc; /* Blu più scuro */
-    text-shadow: 0 0 3px #007acc, 0 0 6px #007acc; /* Effetto neon meno sfocato */
+    color: #007acc;
+    /* Blu più scuro */
+    text-shadow: 0 0 3px #007acc, 0 0 6px #007acc;
+    /* Effetto neon meno sfocato */
     transition: color 0.3s, text-shadow 0.3s;
-    user-select: none; /* Impedisce la selezione del testo */
-    cursor: default; /* Mostra il cursore normale */
+    user-select: none;
+    /* Impedisce la selezione del testo */
+    cursor: default;
+    /* Mostra il cursore normale */
 }
 
 .album-info h2:hover {
-    color: #1e90ff; /* Blu più chiaro al passaggio del mouse */
-    text-shadow: 0 0 8px #1e90ff, 0 0 16px #1e90ff; /* Effetto neon più intenso */
+    color: #1e90ff;
+    /* Blu più chiaro al passaggio del mouse */
+    text-shadow: 0 0 8px #1e90ff, 0 0 16px #1e90ff;
+    /* Effetto neon più intenso */
 }
 
 .album-info p {
@@ -499,17 +532,20 @@ player-controls {
 
 .song-list li {
     display: flex;
-    justify-content: space-between; /* Posiziona il nome e la durata ai lati opposti */
+    justify-content: space-between;
+    /* Posiziona il nome e la durata ai lati opposti */
     margin: 10px 0;
     font-size: 1em;
     color: #fff;
 }
 
 .song-duration {
-    color: #ccc; /* Colore più chiaro per la durata */
+    color: #ccc;
+    /* Colore più chiaro per la durata */
     font-size: 0.9em;
     text-align: right;
-    min-width: 50px; /* Assicura che la durata sia allineata */
+    min-width: 50px;
+    /* Assicura che la durata sia allineata */
 }
 
 .song-list li.playing {
@@ -530,7 +566,7 @@ button:hover {
     align-items: flex-end;
     height: 30px;
     margin-top: 10px;
-}   
+}
 
 .bar {
     width: 5px;
@@ -554,9 +590,12 @@ button:hover {
 }
 
 @keyframes equalizer {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: scaleY(1);
     }
+
     50% {
         transform: scaleY(0.5);
     }
@@ -734,18 +773,23 @@ button:hover {
 }
 
 .song-item:hover {
-        background-color: #007acc; /* Sfondo azzurro al passaggio del mouse */
-    color: #fff; /* Testo bianco al passaggio del mouse */
+    background-color: #007acc;
+    /* Sfondo azzurro al passaggio del mouse */
+    color: #fff;
+    /* Testo bianco al passaggio del mouse */
 }
 
 .song-item.playing {
-    background-color: #1db954; /* Sfondo verde per la canzone in riproduzione */
-    color: #000; /* Testo nero per la canzone in riproduzione */
+    background-color: #1db954;
+    /* Sfondo verde per la canzone in riproduzione */
+    color: #000;
+    /* Testo nero per la canzone in riproduzione */
 }
 
 #audio-loading {
-  display: none;
+    display: none;
 }
+
 /*bodoaga*/
 #like-button.like-button {
     background: transparent !important;
@@ -823,8 +867,10 @@ button:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.3); /* Sfondo molto più trasparente */
-    backdrop-filter: blur(20px); /* Effetto vetro aumentato */
+    background: rgba(0, 0, 0, 0.3);
+    /* Sfondo molto più trasparente */
+    backdrop-filter: blur(20px);
+    /* Effetto vetro aumentato */
     -webkit-backdrop-filter: blur(20px);
     z-index: 10000;
     display: flex;
@@ -843,23 +889,27 @@ button:hover {
 }
 
 .lyrics-overlay-content {
-    background: rgba(0, 0, 0, 0.15); /* Trasparenza leggera come le album-card */
+    background: rgba(0, 0, 0, 0.15);
+    /* Trasparenza leggera come le album-card */
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(0, 122, 204, 0.3); /* Bordo blu coerente */
-    border-radius: 20px; /* Stile arrotondato coerente */
+    border: 1px solid rgba(0, 122, 204, 0.3);
+    /* Bordo blu coerente */
+    border-radius: 20px;
+    /* Stile arrotondato coerente */
     width: 90%;
     max-width: 700px;
     max-height: 85vh;
     overflow: hidden;
-    box-shadow: 
+    box-shadow:
         0 0 25px rgba(0, 122, 204, 0.2),
         inset 0 0 20px rgba(0, 122, 204, 0.1);
     transition: all 0.3s ease;
 }
 
 .lyrics-header {
-    background: rgba(0, 122, 204, 0.2); /* Stile simile ai pulsanti del sito */
+    background: rgba(0, 122, 204, 0.2);
+    /* Stile simile ai pulsanti del sito */
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(0, 122, 204, 0.3);
@@ -873,10 +923,12 @@ button:hover {
 
 .lyrics-header h2 {
     margin: 0;
-    color: #007acc; /* Colore blu coerente */
+    color: #007acc;
+    /* Colore blu coerente */
     font-size: 1.5em;
     font-weight: 600;
-    text-shadow: 0 0 10px rgba(0, 122, 204, 0.5); /* Effetto neon come nel sito */
+    text-shadow: 0 0 10px rgba(0, 122, 204, 0.5);
+    /* Effetto neon come nel sito */
 }
 
 .lyrics-close-btn {
@@ -900,7 +952,8 @@ button:hover {
 .lyrics-close-btn:hover {
     background: rgba(0, 122, 204, 0.4);
     border-color: rgba(0, 122, 204, 0.8);
-    box-shadow: 0 0 15px rgba(0, 122, 204, 0.5); /* Effetto glow coerente */
+    box-shadow: 0 0 15px rgba(0, 122, 204, 0.5);
+    /* Effetto glow coerente */
     transform: scale(1.1);
 }
 
@@ -908,7 +961,8 @@ button:hover {
     padding: 25px;
     max-height: 400px;
     overflow-y: auto;
-    background: transparent; /* Sfondo completamente trasparente */
+    background: transparent;
+    /* Sfondo completamente trasparente */
     position: relative;
 }
 
@@ -922,7 +976,8 @@ button:hover {
 }
 
 .lyrics-container::-webkit-scrollbar-thumb {
-    background: rgba(0, 122, 204, 0.6); /* Scrollbar blu coerente */
+    background: rgba(0, 122, 204, 0.6);
+    /* Scrollbar blu coerente */
     border-radius: 4px;
     border: 1px solid rgba(0, 122, 204, 0.3);
 }
@@ -936,16 +991,20 @@ button:hover {
     text-align: center;
     line-height: 2.5;
     font-size: 1.2rem;
-    color: #ffffff; /* Testo bianco per contrasto */
-    font-family: 'Roboto', sans-serif; /* Font coerente con il sito */
+    color: #ffffff;
+    /* Testo bianco per contrasto */
+    font-family: 'Roboto', sans-serif;
+    /* Font coerente con il sito */
 }
 
 .lyric-line {
     display: block;
     margin: 12px 0;
     padding: 12px 20px;
-    border-radius: 10px; /* Bordi arrotondati coerenti */
-    background: rgba(0, 0, 0, 0.2); /* Sfondo simile alle album-card */
+    border-radius: 10px;
+    /* Bordi arrotondati coerenti */
+    background: rgba(0, 0, 0, 0.2);
+    /* Sfondo simile alle album-card */
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -958,8 +1017,9 @@ button:hover {
     background: rgba(0, 0, 0, 0.3);
     border-color: rgba(0, 122, 204, 0.8);
     box-shadow: 0 0 20px rgba(0, 122, 204, 0.4),
-                inset 0 0 15px rgba(0, 122, 204, 0.2);
-    transform: scale(1.02); /* Effetto hover simile alle album-card */
+        inset 0 0 15px rgba(0, 122, 204, 0.2);
+    transform: scale(1.02);
+    /* Effetto hover simile alle album-card */
 }
 
 /* Classe per evidenziare la riga corrente - STILE COERENTE */
@@ -969,27 +1029,30 @@ button:hover {
     color: #007acc !important;
     font-weight: bold;
     transform: scale(1.05);
-    box-shadow: 
+    box-shadow:
         0 0 25px rgba(0, 122, 204, 0.5),
         inset 0 0 20px rgba(0, 122, 204, 0.2);
-    text-shadow: 0 0 10px #007acc, 
-                 0 0 20px #007acc, 
-                 0 0 30px #007acc; /* Effetto neon come i titoli degli album */
+    text-shadow: 0 0 10px #007acc,
+        0 0 20px #007acc,
+        0 0 30px #007acc;
+    /* Effetto neon come i titoli degli album */
     font-size: 1.3rem;
     animation: lyrics-glow 1s ease-in-out;
 }
 
 /* Nuova animazione coerente con il sito */
 @keyframes lyrics-glow {
-    0% { 
+    0% {
         transform: scale(1.05);
         text-shadow: 0 0 10px #007acc, 0 0 20px #007acc, 0 0 30px #007acc;
     }
-    50% { 
+
+    50% {
         transform: scale(1.08);
         text-shadow: 0 0 15px #007acc, 0 0 25px #007acc, 0 0 35px #007acc;
     }
-    100% { 
+
+    100% {
         transform: scale(1.05);
         text-shadow: 0 0 10px #007acc, 0 0 20px #007acc, 0 0 30px #007acc;
     }
@@ -1001,7 +1064,8 @@ button:hover {
     justify-content: center;
     align-items: center;
     height: 250px;
-    color: #007acc; /* Colore blu coerente */
+    color: #007acc;
+    /* Colore blu coerente */
     font-size: 1.1rem;
 }
 
@@ -1025,14 +1089,16 @@ button:hover {
 
 /* Controlli sincronizzazione - STILE COERENTE */
 .lyrics-controls {
-    background: rgba(0, 122, 204, 0.2); /* Stile simile ai pulsanti del sito */
+    background: rgba(0, 122, 204, 0.2);
+    /* Stile simile ai pulsanti del sito */
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border: 1px solid rgba(0, 122, 204, 0.3);
     color: white;
     padding: 15px 20px;
     margin: 0 20px 20px 20px;
-    border-radius: 10px; /* Bordi arrotondati coerenti */
+    border-radius: 10px;
+    /* Bordi arrotondati coerenti */
     font-size: 0.9rem;
     text-align: center;
     transition: all 0.3s ease;
@@ -1045,7 +1111,8 @@ button:hover {
 }
 
 .lyrics-controls strong {
-    color: #007acc; /* Colore blu coerente */
+    color: #007acc;
+    /* Colore blu coerente */
     text-shadow: 0 0 5px rgba(0, 122, 204, 0.5);
     font-weight: 600;
 }
@@ -1234,8 +1301,10 @@ button:hover {
 }
 
 .freq-slider {
-    writing-mode: bt-lr; /* IE */
-    writing-mode: vertical-lr; /* Standard */
+    writing-mode: bt-lr;
+    /* IE */
+    writing-mode: vertical-lr;
+    /* Standard */
     -webkit-appearance: slider-vertical;
     appearance: slider-vertical;
     width: 6px;
@@ -1400,11 +1469,11 @@ button:hover {
     border-radius: 50%;
 }
 
-input:checked + .slider {
+input:checked+.slider {
     background-color: #00bfff;
 }
 
-input:checked + .slider:before {
+input:checked+.slider:before {
     transform: translateX(22px);
 }
 
@@ -1525,213 +1594,33 @@ input:checked + .slider:before {
         right: 2.5vw;
         max-height: 70vh;
     }
-    
+
     .frequency-sliders {
         grid-template-columns: repeat(3, 1fr);
         gap: 10px;
     }
-    
+
     .freq-slider {
         height: 80px;
     }
-    
+
     .bass-treble-controls {
         gap: 20px;
     }
-    
+
     .knob {
         width: 60px;
         height: 60px;
     }
 
-    /* Header responsive */
-    header h1 {
-        font-size: 2em;
-    }
-
-    /* Discover section responsive */
-    .discover-section h2 {
-        font-size: 1.8em;
-    }
-
-    .discover-section p {
-        font-size: 0.9em;
-    }
-
-    /* Album container responsive */
-    .album-container {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 15px;
-        width: 95%;
-    }
-
-    .album-card {
-        padding: 15px;
-    }
-
-    .album-card h3 {
-        font-size: 1.2em;
-    }
-
-    /* Search container responsive */
-    .search-container {
-        width: 90%;
-    }
-
-    #search-bar {
-        font-size: 14px;
-        padding: 10px 15px;
-    }
-
-    /* Player bar responsive - Stile Spotify mobile */
     .player-bar {
-        padding: 10px 12px;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        height: auto;
-        gap: 10px;
-    }
-
-    /* Info canzone a sinistra */
-    .player-info {
-        flex: 1;
-        min-width: 0;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .album-cover {
-        width: 45px;
-        height: 45px;
-        flex-shrink: 0;
-    }
-
-    .song-details {
-        flex: 1;
-        min-width: 0;
-        overflow: hidden;
-    }
-
-    .song-details p {
-        font-size: 0.85em;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-    /* Nasconde tutti i controlli tranne play/pause */
-    .player-controls {
-        display: flex !important;
-        flex: 0 0 auto;
-        justify-content: flex-end;
-        align-items: center;
-        gap: 0;
-    }
-
-    .player-controls button {
-        display: none !important;
-    }
-
-    /* Mostra solo il pulsante play/pause a destra */
-    .player-controls #play-pause {
-        display: block !important;
-        font-size: 1.8em;
-        padding: 5px;
-        margin: 0;
-    }
-
-    /* Progress bar sotto, full width */
-    #progress-bar {
-        position: absolute;
-        bottom: 0;
-        left: 0;
         width: 100%;
-        margin: 0;
-        height: 3px;
-        border-radius: 0;
+        height: 65px;
     }
 
-    /* Nasconde i tempi su mobile */
-    #current-time, #total-duration {
-        display: none !important;
-    }
-
-    /* Nasconde completamente volume controls */
-    .volume-controls {
-        display: none !important;
-    }
-
-    /* Overlay responsive */
-    .overlay-content {
-        width: 90%;
-        padding: 15px;
-    }
-
-    .album-details {
-        flex-direction: column;
-        text-align: center;
-    }
-
-    .album-details img {
-        margin-bottom: 15px;
-    }
-
-    /* Listen now button responsive */
-    .listen-now {
-        padding: 10px 20px;
-        font-size: 0.9em;
-    }
-
-    .listen-now-main {
-        padding: 12px 25px;
-        font-size: 1em;
-    }
-}
-
-/* Tablet responsive */
-@media (min-width: 769px) and (max-width: 1024px) {
-    header h1 {
-        font-size: 2.5em;
-    }
-
-    .discover-section h2 {
-        font-size: 2.2em;
-    }
-
-    .nav a {
-        margin: 0 15px;
-        font-size: 1.1em;
-    }
-
-    #progress-bar {
-        width: 250px;
-    }
-
-    .player-bar {
-        padding: 10px 15px;
-    }
-}
-
-/* Large screens */
-@media (min-width: 1400px) {
-    .discover-section h2 {
-        font-size: 3em;
-    }
-
-    header h1 {
-        font-size: 3.5em;
-    }
-}
-
-/* Small mobile devices */
-@media (max-width: 480px) {
-    header h1 {
-        font-size: 1.5em;
-    }
-
-    .discover-section h2 {
-        font-size: 1.5em;
+    /* Evita che la player bar fissa copra il contenuto su mobile */
+    body {
+        padding-bottom: 110px;
     }
 
     .album-container {
@@ -1746,24 +1635,10 @@ input:checked + .slider:before {
     .album-card h3 {
         font-size: 1em;
     }
-
-    .player-controls button {
+        .player-controls button {
         font-size: 1em;
         padding: 6px;
         margin: 0 3px;
     }
 
-    .listen-now {
-        padding: 8px 15px;
-        font-size: 0.8em;
-    }
-
-    .nav a {
-        font-size: 1.3em;
-    }
-
-    #search-bar {
-        font-size: 13px;
-        padding: 8px 12px;
-    }
 }

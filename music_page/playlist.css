@@ -5,6 +5,7 @@ body {
     color: #fff;
     margin: 0;
     padding: 0;
+    padding-bottom: 90px; /* spazio per la player bar fissa */
     overflow-x: hidden;
     height: auto;
     position: relative;
@@ -771,5 +772,10 @@ header h1 {
     
     .overlay-song-info .song-artist {
         font-size: 13px;
+    }
+
+    /* Evita che la player bar fissa copra il contenuto su mobile */
+    body {
+        padding-bottom: 110px;
     }
 }
