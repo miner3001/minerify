@@ -28,15 +28,15 @@
 </nav>
 <div class="register-container">
     <h2>Registrati per un account</h2>
-    <form action="#" method="POST">
+    <form id="registerForm">
         <!-- Nome Input -->
-        <input type="text" class="input-field" placeholder="Nome" required>
+        <input type="text" id="nome" class="input-field" placeholder="Nome" required>
         <!-- Email Input -->
-        <input type="email" class="input-field" placeholder="Indirizzo email" required>
+        <input type="email" id="email" class="input-field" placeholder="Indirizzo email" required>
         <!-- Password Input -->
-        <input type="password" class="input-field" placeholder="Crea una password" required>
+        <input type="password" id="password" class="input-field" placeholder="Crea una password" required>
         <!-- Data di Nascita -->
-        <input type="date" class="input-field" required>
+        <input type="date" id="dataNascita" class="input-field" required>
         <!-- Bottone Registrazione -->
         <button type="submit" class="register-button">Registrati</button>
     </form>
@@ -51,6 +51,7 @@
 
 <div class="stars"></div>
 
+<script src="registrati.js"></script>
 <script>
     // Hamburger Menu
     const hamburgerMenu = document.querySelector('.hamburger-menu');

@@ -143,7 +143,7 @@ function initializeAllSongsData() {
     logEvent('SUCCESS', `Caricate ${allSongsData.length} canzoni da ${albumCards.length} album`);
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', async function () {
     logEvent('INFO', '=== MINERIFY MUSIC PLAYER AVVIATO ===');
     logEvent('INFO', 'DOM caricato completamente, inizializzazione in corso...');
     
@@ -754,251 +754,60 @@ document.addEventListener('DOMContentLoaded', function () {
     } else {
         logEvent('INFO', 'Equalizzatore non presente nel DOM (button/panel mancanti)');
     }
+
+    // === Lyrics: apertura/chiusura modale ===
+    if (lyricsButton && lyricsOverlay) {
+        lyricsButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            openLyricsOverlay();
+            logEvent('UI', 'Modale testi aperta');
+        });
+
+        // Chiudi con il bottone X
+        if (closeLyricsButton) {
+            closeLyricsButton.addEventListener('click', (e) => {
+                e.stopPropagation();
+                closeLyricsOverlay();
+                logEvent('UI', 'Modale testi chiusa (X)');
+            });
+        }
+
+        // Chiudi cliccando fuori dalla modale
+        lyricsOverlay.addEventListener('click', (event) => {
+            if (event.target === lyricsOverlay) {
+                closeLyricsOverlay();
+                logEvent('UI', 'Modale testi chiusa (click fuori)');
+            }
+        });
+
+        // Chiudi con ESC
+        window.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && lyricsOverlay.classList.contains('active')) {
+                closeLyricsOverlay();
+                logEvent('UI', 'Modale testi chiusa (ESC)');
+            }
+        });
+
+        logEvent('SUCCESS', 'Event listener lyrics configurati');
+    } else {
+        logEvent('INFO', 'Lyrics non presente nel DOM (button/overlay mancanti)');
+    }
 });
 
-// Mappa delle durate delle tracce (secondi) per ogni file audio
-const trackDurations = {
-    // Esempio: 'music/1.mp3': 180, // 3:00
+// Durate delle tracce: caricate da JSON esterno per facilità di manutenzione
+let trackDurations = {};
 
-    // innocente 
-    'music/1.mp3': 119,   // 1 min e 59 secondi
-    'music/2.mp3': 232,   // 3 min e 52 secondi
-    'music/3.mp3': 194,   // 3 min e 14 secondi
-    'music/4.mp3': 144,   // 2 min e 24 secondi
-    'music/5.mp3': 186,   // 3 min e 06 secondi
-    'music/61.mp3': 176,  // 2 min e 56 secondi
-    'music/62.mp3': 183,  // 3 min e 03 secondi
-    'music/63.mp3': 147,  // 2 min e 27 secondi
-    'music/64.mp3': 130,  // 2 min e 10 secondi
-    'music/65.mp3': 186,  // 3 min e 06 secondi
-    'music/66.mp3': 203,  // 3 min e 23 secondi
-    'music/67.mp3': 203,  // 3 min e 23 secondi
-    'music/68.mp3': 168,  // 2 min e 48 secondi
-    'music/69.mp3': 147,  // 2 min e 27 secondi
-    'music/70.mp3': 167,  // 2 min e 47 secondi
-    'music/71.mp3': 177,  // 2 min e 57 secondi
-    'music/72.mp3': 217,  // 3 min e 37 secondi
-    'music/73.mp3': 226,  // 3 min e 46 secondi
-
-    // astroworld
-    'music/6.mp3': 191,   // BUTTERFLY EFFECT - Travis Scott (3:11)
-    'music/7.mp3': 313,   // Sicko Mode - Travis Scott (5:13)
-    'music/8.mp3': 146,   // Skeletons - Travis Scott (2:26)
-    'music/9.mp3': 196,   // 5% TINT - Travis Scott (3:16)
-    'music/10.mp3': 191,  // ZEZE - Travis Scott (3:11)
-    'music/74.mp3': 271,  // STARGAZING - Travis Scott (4:31)
-    'music/75.mp3': 180,  // CAROUSEL (Ft. Frank Ocean) - Travis Scott (3:00)
-    'music/76.mp3': 186,  // R.I.P. SCREW (Ft. Swae Lee) - Travis Scott (3:06)
-    'music/77.mp3': 338,  // STOP TRYING TO BE GOD (Ft. James Blake, Kid Cudi & Philip Bailey) - Travis Scott (5:38)
-    'music/78.mp3': 218,  // NO BYSTANDERS (Ft. Juice WRLD & Sheck Wes) - Travis Scott (3:38)
-    'music/79.mp3': 232,  // WAKE UP (Ft. The Weeknd) - Travis Scott (3:52)
-    'music/80.mp3': 157,  // NC-17 (Ft. 21 Savage) - Travis Scott (2:37)
-    'music/81.mp3': 143,  // ASTROTHUNDER - Travis Scott (2:23)
-    'music/82.mp3': 150,  // YOSEMITE (Ft. Gunna & NAV) - Travis Scott (2:30)
-    'music/83.mp3': 198,  // CAN'T SAY (Ft. Don Toliver) - Travis Scott (3:18)
-    'music/84.mp3': 177,  // WHO? WHAT! (Ft. Quavo & Takeoff) - Travis Scott (2:57)
-    'music/85.mp3': 218,  // HOUSTONFORNICATION - Travis Scott (3:38)
-    'music/86.mp3': 209,  // COFFEE BEAN - Travis Scott (3:29)
-
-    // The Globe - Kid Yugi
-    'music/11.mp3': 212,  // DEM - Kid Yugi (ft. Artie 5ive & Tony Boy) 3:32
-    'music/12.mp3': 185,  // GRAMMELOT - Kid Yugi 3:05
-    'music/13.mp3': 191,  // Il Ferro di Čechov - Kid Yugi 3:11
-    'music/14.mp3': 146,  // Il Filmografo - Kid Yugi 2:26
-    'music/15.mp3': 117,  // Yung 3P 3 - Kid Yugi 1:57
-    'music/93.mp3': 116,  // Hybris - Kid Yugi 1:56
-    'music/94.mp3': 180,  // Kabuki - Kid Yugi 3:00
-    'music/95.mp3': 175,  // No Gimmick - Kid Yugi 2:55
-    'music/96.mp3': 207,  // Sturm und drang - Kid Yugi 3:27
-    'music/97.mp3': 145,  // Back n' Forth (ft. Kira) - Kid Yugi 2:25
-    'music/98.mp3': 151,  // King Lear (ft. Sosa Priority) - Kid Yugi 2:31
-    'music/99.mp3': 182,  // Paradise Now - Kid Yugi 3:02
-
-    // Sfera Ebbasta
-    'music/16.mp3': 185,  // Ricchi x Sempre - Sfera Ebbasta (3:05)
-    'music/17.mp3': 205,  // Sciroppo (ft. DrefGold) - Sfera Ebbasta (3:25)
-    'music/18.mp3': 185,  // Tran Tran - Sfera Ebbasta (3:05)
-    'music/19.mp3': 189,  // Bancomat - Sfera Ebbasta (3:09)
-    'music/20.mp3': 200,  // Serpenti a Sonagli - Sfera Ebbasta (3:20)
-    'music/87.mp3': 183,  // Uber - Sfera Ebbasta (3:03)
-    'music/88.mp3': 184,  // Leggenda - Sfera Ebbasta (3:04)
-    'music/89.mp3': 210,  // Rockstar - Sfera Ebbasta (3:30)
-    'music/90.mp3': 160,  // 20 Collane (ft. Rich The Kid) - Sfera Ebbasta (2:40)
-    'music/91.mp3': 210,  // Cupido (ft. Quavo) - Sfera Ebbasta (3:30)
-    'music/92.mp3': 143,  // XNX - Sfera Ebbasta (2:23)
-
-    // Baby Gang (Ep2)
-    'music/21.mp3': 182,  // Paranoia - Baby Gang (3:02)
-    'music/22.mp3': 166,  // Combattere - Baby Gang (2:46)
-    'music/23.mp3': 160,  // Carico - Baby Gang (2:40)
-    'music/24.mp3': 143,  // 2000 - Baby Gang (2:23)
-    'music/25.mp3': 144,  // Cella 3 - Baby Gang (2:24)
-    'music/26.mp3': 217,  // Mentalité - Baby Gang (3:37)
-    'music/27.mp3': 212,  // Lei - Baby Gang (3:32)
-    'music/28.mp3': 169,  // Mamacita - Baby Gang (2:49)
-
-    // UTOPIA - Travis Scott
-    'music/29.mp3': 222,  // HYAENA - Travis Scott (3:42)
-    'music/30.mp3': 184,  // THANK GOD - Travis Scott (3:04)
-    'music/31.mp3': 255,  // MODERN JAM (Ft. Teezo Touchdown) - Travis Scott (4:15)
-    'music/32.mp3': 251,  // MY EYES - Travis Scott (4:11)
-    'music/33.mp3': 127,  // GOD’S COUNTRY - Travis Scott (2:07)
-    'music/34.mp3': 204,  // SIRENS - Travis Scott (3:24)
-    'music/35.mp3': 246,  // MELTDOWN (Ft. Drake) - Travis Scott (4:06)
-    'music/36.mp3': 191,  // FE!N (Ft. Playboi Carti) - Travis Scott (3:11)
-    'music/37.mp3': 274,  // DELRESTO (ECHOES) - Beyoncé & Travis Scott (4:34)
-    'music/38.mp3': 211,  // I KNOW ? - Travis Scott (3:31)
-    'music/39.mp3': 223,  // TOPIA TWINS (Ft. 21 Savage & Rob49) - Travis Scott (3:43)
-    'music/40.mp3': 258,  // CIRCUS MAXIMUS (Ft. Swae Lee & The Weeknd) - Travis Scott (4:18)
-    'music/41.mp3': 154,  // PARASAIL (Ft. Dave Chappelle & Yung Lean) - Travis Scott (2:34)
-    'music/42.mp3': 366,  // SKITZO (Ft. Young Thug) - Travis Scott (6:06)
-    'music/43.mp3': 163,  // LOST FOREVER (Ft. Westside Gunn) - Travis Scott (2:43)
-    'music/44.mp3': 226,  // LOOOVE (Ft. Kid Cudi) - Travis Scott (3:46)
-    'music/45.mp3': 185,  // K-POP (Ft. Bad Bunny & The Weeknd) - Travis Scott (3:05)
-    'music/46.mp3': 353,  // TELEKINESIS (Ft. Future & SZA) - Travis Scott (5:53)
-
-    // 20 capo plaza 
-    'music/47.mp3': 241,  // 20 - Capo Plaza (4:01)
-    'music/48.mp3': 180,  // Giù da me - Capo Plaza (3:00)
-    'music/49.mp3': 185,  // Tesla (Ft. DrefGold & Sfera Ebbasta) - Capo Plaza (3:05)
-    'music/50.mp3': 146,  // Nike Boy - Capo Plaza (2:26)
-    'music/51.mp3': 197,  // Come me - Capo Plaza (3:17)
-    'music/52.mp3': 208,  // J$ JP - Capo Plaza (3:28)
-    'music/53.mp3': 135,  // Interlude (Ora è la mia ora) - Capo Plaza (2:15)
-    'music/54.mp3': 234,  // Ne è valsa la pena (Ft. Ghali) - Capo Plaza (3:54)
-    'music/55.mp3': 208,  // Non cambierò mai - Capo Plaza (3:28)
-    'music/56.mp3': 194,  // Taxi - Capo Plaza (3:14)
-    'music/57.mp3': 208,  // Uno squillo - Capo Plaza (3:28)
-    'music/58.mp3': 195,  // Vabbene - Capo Plaza (3:15)
-    'music/59.mp3': 219,  // Forte e chiaro - Capo Plaza (3:39)
-    'music/60.mp3': 221,  // Giovane fuoriclasse - Capo Plaza (3:41)
-
-    // I Nomi del Diavolo - Kid Yugi
-    'music/100.mp3': 135,  // L’Anticristo (2:15)
-    'music/101.mp3': 195,  // Capra a tre Teste (Ft. Artie 5ive & Tony Boy) (3:15)
-    'music/102.mp3': 160,  // Eva (Ft. Tedua) (2:40)
-    'music/103.mp3': 206,  // Servizio (Ft. Noyz Narcos & Papa V) (3:26)
-    'music/104.mp3': 193,  // Il Signore delle Mosche (3:13)
-    'music/105.mp3': 164,  // Lilith (2:44)
-    'music/106.mp3': 185,  // Nemico (Ft. Ernia) (3:05)
-    'music/107.mp3': 144,  // Denaro (Ft. Simba La Rue) (2:24)
-    'music/108.mp3': 185,  // Yung 3p 4 (3:05)
-    'music/109.mp3': 186,  // Terr1 (Ft. Geolier) (3:06)
-    'music/110.mp3': 188,  // Ilva (Fume scure rmx) (Ft. Fido Guido) (3:08)
-    'music/111.mp3': 174,  // Paganini (2:54)
-    'music/112.mp3': 178,  // Ex Angelo (Ft. Sfera Ebbasta) (2:58)
-    'music/113.mp3': 180,  // Lucifero (3:00)
-
-    // Morad
-    'music/114.mp3': 160,  // Cristales (2:40)
-    'music/115.mp3': 185,  // Paz (by Morad & NICKI NICOLE) (3:05)
-    'music/116.mp3': 174,  // Mi Barrio (2:54)
-    'music/117.mp3': 203,  // No Estuviste En Lo Malo (3:23)
-    'music/118.mp3': 202,  // Andando (by Morad, Eladio Carrión & Beny Jr) (3:22)
-    'music/119.mp3': 178,  // Soledad (2:58)
-    'music/120.mp3': 185,  // Estopa (3:05)
-    'music/121.mp3': 183,  // Niños Pequeños (3:03)
-    'music/122.mp3': 207,  // María (Ft. Ninho) (3:27)
-    'music/123.mp3': 174,  // Poporopa (2:54)
-    'music/124.mp3': 173,  // Se Grita (Ft. JuL) (2:53)
-    'music/125.mp3': 177,  // Por Los Míos (2:57)
-    'music/126.mp3': 190,  // Ojos Sin Ver (by Morad & ElGrandeToto) (3:10)
-    'music/127.mp3': 175,  // Desespero (by Morad & Rvfv) (2:55)
-    'music/128.mp3': 195,  // Problemas (3:15)
-    'music/129.mp3': 174,  // Walou Bla Bla (2:54)
-    'music/130.mp3': 180,  // Un Amigo Me Falló (3:00)
-    'music/131.mp3': 185,  // Tiempo de Nada (3:05)
-    'music/132.mp3': 180,  // Caballero (3:00)
-
-    // in piazza ci muori 
-    'music/133.mp3': 207, // Napoletano - 3:27
-    'music/134.mp3': 185, // Piazza di spaccio 2 (Ft. Simba La Rue) - 3:05
-    'music/135.mp3': 174, // Fuori Milano - 2:54
-    'music/136.mp3': 190, // Regole del blocco (Ft. Sacky) - 3:10
-    'music/137.mp3': 202, // Gomorra (Ft. Artie 5ive) - 3:22
-    'music/138.mp3': 169, // Gucci bag - 2:49
-    'music/139.mp3': 213, // Gangsta life (Ft. Fre_nky & MadPrince (ITA)) - 3:33
-    'music/140.mp3': 201, // Piove (Ft. Neima Ezza) - 3:21
-    'music/141.mp3': 196, // Sotto indagine (Ft. Savage 167) - 3:16
-    'music/142.mp3': 225, // L’ultima notte - 3:45
-
-    //fsk trapshit revenge 
-   'music/143.mp3': 225,  // BLA BLA - 3:45
-  'music/144.mp3': 192,  // ANSIA NO - 3:12
-  'music/145.mp3': 198,  // CAMOSCIO - 3:18
-  'music/146.mp3': 209,  // CAPI DELLA TRAP (Ft. Guè) - 3:29
-  'music/147.mp3': 185,  // NON FARCELO FARE - 3:05
-  'music/148.mp3': 176,  // FRAGOLA EROINA - 2:56
-  'music/149.mp3': 215,  // PIÙ DI UN KILO - 3:35
-  'music/150.mp3': 172,  // UP - 2:52
-  'music/151.mp3': 202,  // NO SPIE - 3:22
-  'music/152.mp3': 189,  // CATENE JESUS - 3:09
-  'music/153.mp3': 207,  // 4L (Ft. Rosa Chemical) - 3:27
-  'music/154.mp3': 191,  // OK NO PLAY - 3:11
-  'music/155.mp3': 223,  // LA PROVA DEL CUOCO - 3:43
-  'music/156.mp3': 195,  // MELISSA P - 3:15
-  'music/157.mp3': 169,  // NON E' MIA - 2:49
-  'music/158.mp3': 200,  // CANOTTIERA WHITE - 3:20
-  'music/159.mp3': 190,  // ABBIAMO - 3:10
-  'music/160.mp3': 213,  // PICKUP (Ft. DAYTONA KK) - 3:33
-
-  //milano demons
-   'music/161.mp3': 199,  // Milano Demons - 3:19
-  'music/162.mp3': 171,  // Cup - 2:51
-  'music/163.mp3': 188,  // Vorrei (Ft. Lazza) - 3:08
-  'music/164.mp3': 158,  // Take 4 - 2:38
-  'music/165.mp3': 209,  // Rollie AP (Ft. Pyrex & Slings) - 3:29
-  'music/166.mp3': 185,  // Cellphone (Ft. Bianca Costa & Rhove) - 3:05
-  'music/167.mp3': 187,  // Diamante - 3:07
-  'music/168.mp3': 195,  // Non è Easy - 3:15
-  'music/169.mp3': 75,   // Messaggio in Segreteria (interlude) - 1:15
-  'music/170.mp3': 211,  // Cicatrici (Ft. Tedua) - 3:31
-  'music/171.mp3': 185,  // Non lo Sai - 3:05
-  'music/172.mp3': 182,  // Naturale - 3:02
-  'music/173.mp3': 192,  // Alleluia (Ft. Sfera Ebbasta) - 3:12
-  'music/174.mp3': 206,  // Soldi Puliti - 3:26
-  'music/175.mp3': 187,  // Dimenticare (Ft. Federica Abbate) - 3:07
-  'music/176.mp3': 189,  // Un Altro Show (Ft. Geolier) - 3:09
-  'music/177.mp3': 194,  // Se Fosse Per Me - 3:14
-  'music/178.mp3': 116,  // 3 Stick Freestyle - 1:56
-
-  //sfera ebbasta 
-    'music/179.mp3': 199, // Equilibrio - 3:19
-  'music/180.mp3': 187, // Figli Di Papà - 3:07
-  'music/181.mp3': 205, // Balenciaga (Ft. SCH) - 3:25
-  'music/182.mp3': 216, // Notti - 3:36
-  'music/183.mp3': 198, // Visiera A Becco - 3:18
-  'music/184.mp3': 196, // No No - 3:16
-  'music/185.mp3': 196, // BRNBQ - 3:16
-  'music/186.mp3': 191, // Bang Bang - 3:11
-  'music/187.mp3': 202, // Quello Che Non Va - 3:22
-  'music/188.mp3': 220, // Cartine Cartier by SCH (Ft. Sfera Ebbasta) - 3:40
-  'music/189.mp3': 190, // BHMG - 3:10
-
-  //salvatore vive
-  'music/190.mp3': 177, // Salvatore vive - Paky - 2:57
-  'music/191.mp3': 135, // Belen - Paky - 2:15
-  'music/192.mp3': 125, // Sharm El Sheikh - Paky - 2:05
-  'music/193.mp3': 194, // La Bellavita (Ft. JuL) - Paky - 3:14
-  'music/194.mp3': 192, // Onore e rispetto - Paky - 3:12
-  'music/195.mp3': 170, // Intro - Paky - 2:50
-  'music/196.mp3': 124, // 100 Uomini - Paky - 2:04
-  'music/197.mp3': 175, // Blauer - Paky - 2:55
-  'music/198.mp3': 122, // No wallet (Ft. Marracash) - Paky - 2:02
-  'music/199.mp3': 122, // Pascià - Paky - 2:02
-  'music/200.mp3': 159, // Auto tedesca - Paky - 2:39
-  'music/201.mp3': 181, // Star (Ft. Shiva) - Paky - 3:01
-  'music/202.mp3': 213, // Salvatore - Paky - 3:33
-  'music/203.mp3': 164, // Quando piove - Paky - 2:44
-  'music/204.mp3': 184, // Vivi o muori (Ft. Guè) - Paky - 3:04
-  'music/205.mp3': 193, // Vita sbagliata - Paky - 3:13
-  'music/206.mp3': 189, // Comandamento (Ft. Geolier) - Paky - 3:09
-  'music/207.mp3': 170, // Giorno del giudizio (Ft. Luchè & Mahmood) - Paky - 2:50
-  'music/208.mp3': 186, // Mi manchi - Paky - 3:06
-  'music/209.mp3': 167, // Storie tristi - Paky - 2:47
-  'music/210.mp3': 170, // Mama I’m a Criminal - Paky - 2:50
-  'music/211.mp3': 104  // Bronx - Paky - 1:44
-};
+async function loadTrackDurations() { 
+    try {
+        const resp = await fetch('durations.json');
+        if (!resp.ok) throw new Error('HTTP ' + resp.status);
+        trackDurations = await resp.json();
+        logEvent('SUCCESS', 'Mappa durate caricata da JSON', { entries: Object.keys(trackDurations).length });
+    } catch (err) {
+        logEvent('ERROR', 'Impossibile caricare durations.json, fallback a mappa vuota', { error: err.message });
+        trackDurations = {};
+    }
+}
 
 function initializeSearch() {
     logEvent('INFO', 'Inizializzazione sistema di ricerca...');
@@ -2029,8 +1838,13 @@ function updateMediaSessionMetadata(songData) {
             hasArtwork: !!artworkUrl
         });
 
-        // Aggiorna anche il playback state
-        navigator.mediaSession.playbackState = audioPlayer.paused ? 'paused' : 'playing';
+        // Aggiorna anche il playback state (recupera l'elemento audio in modo sicuro)
+        const _audioEl = document.getElementById('audio-player');
+        try {
+            navigator.mediaSession.playbackState = _audioEl ? (_audioEl.paused ? 'paused' : 'playing') : 'none';
+        } catch (e) {
+            logEvent('ERROR', 'Errore nel settare playbackState Media Session', e);
+        }
 
     } catch (error) {
         logEvent('ERROR', 'Errore aggiornamento Media Session metadata', error);

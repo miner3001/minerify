@@ -1,14 +1,27 @@
-document.getElementById('loginForm').addEventListener('submit', function(event) {
+document.getElementById('loginForm').addEventListener('submit', async function(event) {
     event.preventDefault();
     
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
-    // Semplice controllo delle credenziali (da sostituire con un controllo reale)
-    if (email === 'utente@example.com' && password === 'password') {
-        window.location.href = '../../music_page/scopri.html';
-    } else {
-        alert('Credenziali non valide');
+    try {
+        // Carica gli utenti dall'API REST di json-server
+        const response = await fetch('http://localhost:3000/users');
+        const users = await response.json();
+        
+        // Verifica se l'utente esiste e la password è corretta
+        const user = users.find(u => u.email === email && u.password === password);
+        
+        if (user) {
+            // Salva i dati dell'utente in localStorage
+            localStorage.setItem('currentUser', JSON.stringify(user));
+            window.location.href = '../../music_page/scopri.html';
+        } else {
+            alert('Credenziali non valide. Email o password errata.');
+        }
+    } catch (error) {
+        console.error('Errore nel caricamento degli utenti:', error);
+        alert('Errore durante l\'accesso. Assicurati che json-server sia in esecuzione sulla porta 3000.');
     }
 });
 
