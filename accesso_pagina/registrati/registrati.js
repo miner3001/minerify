@@ -7,8 +7,8 @@ document.getElementById('registerForm').addEventListener('submit', async functio
     const dataNascita = document.getElementById('dataNascita').value;
 
     try {
-        // Carica gli utenti dall'API REST di json-server
-        const response = await fetch('http://localhost:3000/users');
+        // Carica gli utenti dall'API SheetDB
+        const response = await fetch('https://sheetdb.io/api/v1/kmkc001zw9m69');
         const users = await response.json();
         
         // Verifica se l'email esiste già
@@ -27,24 +27,24 @@ document.getElementById('registerForm').addEventListener('submit', async functio
             dataNascita: dataNascita
         };
         
-        // Invia il nuovo utente al server tramite POST
-        const createResponse = await fetch('http://localhost:3000/users', {
+        // Invia il nuovo utente al server tramite POST su SheetDB
+        const createResponse = await fetch('https://sheetdb.io/api/v1/kmkc001zw9m69', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(newUser)
+            body: JSON.stringify({data: newUser})
         });
         
         if (createResponse.ok) {
-            const createdUser = await createResponse.json();
+            const result = await createResponse.json();
             
             // Salva i dati dell'utente in localStorage
-            localStorage.setItem('currentUser', JSON.stringify(createdUser));
+            localStorage.setItem('currentUser', JSON.stringify(newUser));
             
             alert('Registrazione completata con successo! Accedi con le tue credenziali.');
             
-            // Reindirizza alla pagina di accesso o direttamente a scopri
+            // Reindirizza alla pagina di accesso
             setTimeout(() => {
                 window.location.href = '../accedi/accedi.html';
             }, 1500);
@@ -54,7 +54,7 @@ document.getElementById('registerForm').addEventListener('submit', async functio
         
     } catch (error) {
         console.error('Errore durante la registrazione:', error);
-        alert('Errore durante la registrazione. Assicurati che json-server sia in esecuzione sulla porta 3000.');
+        alert('Errore durante la registrazione. Prova di nuovo.');
     }
 });
 

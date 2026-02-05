@@ -5,8 +5,8 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     const password = document.getElementById('password').value;
 
     try {
-        // Carica gli utenti dall'API REST di json-server
-        const response = await fetch('http://localhost:3000/users');
+        // Carica gli utenti dall'API SheetDB
+        const response = await fetch('https://sheetdb.io/api/v1/kmkc001zw9m69');
         const users = await response.json();
         
         // Verifica se l'utente esiste e la password è corretta
@@ -21,7 +21,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
         }
     } catch (error) {
         console.error('Errore nel caricamento degli utenti:', error);
-        alert('Errore durante l\'accesso. Assicurati che json-server sia in esecuzione sulla porta 3000.');
+        alert('Errore durante l\'accesso. Prova di nuovo.');
     }
 });
 
