@@ -7,10 +7,17 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
     try {
         // Carica gli utenti dall'API SheetDB
         const response = await fetch('https://sheetdb.io/api/v1/kmkc001zw9m69');
-        const users = await response.json();
+        const allUsers = await response.json();
+        
+        // Filtra solo gli utenti che hanno email (esclude intestazioni o righe vuote)
+        const users = allUsers.filter(u => u["email "] && u["email "].trim() !== '');
+        
+        console.log('Utenti filtrati:', users);
         
         // Verifica se l'utente esiste e la password è corretta
-        const user = users.find(u => u.email === email && u.password === password);
+        const user = users.find(u => u["email "] === email && u.password === password);
+        
+        console.log('Utente trovato:', user);
         
         if (user) {
             // Salva i dati dell'utente in localStorage

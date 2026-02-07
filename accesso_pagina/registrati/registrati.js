@@ -12,17 +12,22 @@ document.getElementById('registerForm').addEventListener('submit', async functio
         const users = await response.json();
         
         // Verifica se l'email esiste già
-        const userExists = users.some(u => u.email === email);
+        const userExists = users.some(u => u["email "] === email);
         
         if (userExists) {
             alert('Questa email è già registrata. Usa un\'email diversa.');
             return;
         }
         
+        // Genera un nuovo ID incrementale
+        const maxId = Math.max(...users.map(u => parseInt(u["Id "]) || 0), 0);
+        const newId = (maxId + 1).toString();
+        
         // Crea un nuovo utente
         const newUser = {
+            "Id ": newId,
             nome: nome,
-            email: email,
+            "email ": email,
             password: password,
             dataNascita: dataNascita
         };
