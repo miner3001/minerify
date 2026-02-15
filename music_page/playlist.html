@@ -12,7 +12,9 @@
 </head>
 <body>
 
-    <div class="stars"></div> <header>
+    <div class="stars"></div>
+
+    <header>
         <h1>Minerify</h1>
         <div class="user-profile-container">
             <div class="user-profile" id="user-profile">
@@ -31,91 +33,195 @@
             <a href="../index.html"><i class="bi bi-house-door"></i> Home</a>
             <a href="../music_page/scopri.html"><i class="bi bi-compass"></i> Scopri</a>
             <a href="../music_page/playlist.html"><i class="bi bi-collection-play"></i> La tua libreria</a>
-            <a href="../pagamento/premium.html"><i class="bi bi-gem"></i> Premium</a>        </nav>
+            <a href="../pagamento/premium.html"><i class="bi bi-gem"></i> Premium</a>
+        </nav>
     </header>
 
     <main class="main-content">
-        <section class="playlist-container main-favorites-section">
-            <h2>I tuoi brani preferiti</h2>
-            <div id="main-favorite-albums-grid" class="album-container">
-                <p class="empty-message" id="main-favorites-empty-message" style="display: none;">Nessun brano preferito. Aggiungine alcuni per vederli qui!</p>
-            </div>
-        </section>
 
+        <!-- Sezione playlist principale -->
         <div class="playlist-main-section">
             <div class="playlist-feature-container">
+
+                <!-- La tua playlist -->
                 <section class="user-playlist-section">
                     <div class="playlist-header">
                         <h2>La tua playlist</h2>
                         <div class="playlist-header-btns">
-                            <button id="play-playlist-btn" class="play-playlist-btn" title="Riproduci tutta la playlist"><i class="bi bi-play-circle-fill"></i> Play Playlist</button>
-                            <button id="open-overlay-btn" class="add-main-btn" title="Aggiungi canzoni"><i class="bi bi-plus-circle"></i></button>
+                            <button id="play-playlist-btn" class="play-playlist-btn" title="Riproduci tutta la playlist">
+                                <i class="bi bi-play-circle-fill"></i> Play
+                            </button>
+                            <button id="open-overlay-btn" class="add-main-btn" title="Aggiungi canzoni">
+                                <i class="bi bi-plus-circle"></i>
+                            </button>
                         </div>
                     </div>
-                    <ul id="user-playlist-list" class="song-list">
-                        <li class="table-header">
-                            <span>Titolo</span>
-                            <span>Artista</span>
-                            <span class="actions-header">Azioni</span>
-                        </li>
-                        <p class="empty-message" id="user-playlist-empty-message" style="display: none;">Nessuna canzone nella playlist. Aggiungine alcune!</p>
-                    </ul>
+                    <ul id="user-playlist-list" class="song-list"></ul>
                 </section>
 
+                <!-- Brani preferiti -->
                 <section class="favorites-section">
                     <div class="playlist-header">
-                        <h2>Brani singoli preferiti</h2> </div>
-                    <ul id="favorite-songs-list" class="song-list">
-                        <li class="table-header">
-                            <span>Titolo</span>
-                            <span>Artista</span>
-                            <span class="actions-header">Azioni</span>
-                        </li>
-                        <p class="empty-message" id="favorite-songs-empty-message" style="display: none;">Nessun brano singolo preferito.</p>
-                    </ul>
+                        <h2>Brani preferiti</h2>
+                    </div>
+                    <ul id="favorite-songs-list" class="song-list"></ul>
                 </section>
+
             </div>
         </div>
-    </main>    <div id="add-songs-overlay" class="add-songs-overlay">
+    </main>
+
+    <!-- Overlay aggiungi canzoni -->
+    <div id="add-songs-overlay" class="add-songs-overlay">
         <div class="overlay-content">
-            <button id="close-overlay-btn" class="close-overlay-btn" title="Chiudi"><i class="bi bi-x-lg"></i></button>
+            <button id="close-overlay-btn" class="close-overlay-btn" title="Chiudi">
+                <i class="bi bi-x-lg"></i>
+            </button>
+            <h3 class="overlay-title"><i class="bi bi-music-note-list"></i> Aggiungi canzoni</h3>
             <div class="overlay-search-container">
-                <input type="text" id="overlay-search-bar" placeholder="Cerca tra tutte le canzoni disponibili...">
+                <i class="bi bi-search overlay-search-icon"></i>
+                <input type="text" id="overlay-search-bar" placeholder="Cerca per titolo, artista o album...">
             </div>
             <div class="overlay-songs-grid" id="overlay-songs-grid">
-                <!-- Le canzoni verranno inserite qui dinamicamente -->
+                <!-- Popolato dinamicamente -->
             </div>
-            <audio id="overlay-audio-player" controls style="width: 100%; margin-top: 18px; display: none;"></audio>
         </div>
     </div>
 
+    <!-- Player Bar -->
     <div class="player-bar">
+
+        <!-- Loading indicator -->
+        <div id="audio-loading" class="audio-loading" style="display:none;">
+            <div class="audio-loading-spinner"></div>
+        </div>
+
+        <!-- Info canzone corrente -->
         <div class="player-info">
             <img id="current-album-cover" src="" alt="Album Cover" class="album-cover">
             <div class="song-details">
                 <p id="current-song">Nessuna canzone in riproduzione</p>
-                <p id="current-artist"></p> </div>
+                <p id="current-artist" class="current-artist-text"></p>
+            </div>
         </div>
+
+        <!-- Controlli -->
         <div class="player-controls">
-            <button id="prev-song"><i class="bi bi-skip-start-fill"></i></button>
-            <button id="play-pause"><i class="bi bi-play-fill"></i></button>
-            <button id="next-song"><i class="bi bi-skip-end-fill"></i></button>
-            <button id="shuffle"><i class="bi bi-shuffle"></i></button>
-            <button id="loop"><i class="bi bi-repeat"></i></button>
+            <button id="shuffle" title="Shuffle"><i class="bi bi-shuffle"></i></button>
+            <button id="prev-song" title="Precedente"><i class="bi bi-skip-start-fill"></i></button>
+            <button id="play-pause" title="Play/Pausa"><i class="bi bi-play-fill"></i></button>
+            <button id="next-song" title="Successivo"><i class="bi bi-skip-end-fill"></i></button>
+            <button id="loop" title="Loop"><i class="bi bi-repeat"></i></button>
             <span id="current-time">0:00</span>
             <input type="range" id="progress-bar" value="0" max="100">
             <span id="total-duration">0:00</span>
         </div>
-        <div class="volume-controls">
-            <input type="range" id="volume-control" value="50" max="100">
+
+        <!-- Volume + azioni extra -->
+        <div class="player-right">
+            <div class="volume-controls">
+                <i class="bi bi-volume-up volume-icon"></i>
+                <input type="range" id="volume-control" value="50" min="0" max="100">
+            </div>
+            <div class="player-actions">
+                <button id="like-button"            class="action-btn" title="Mi piace">🤍</button>
+                <button id="add-to-playlist-button" class="action-btn" title="Aggiungi alla playlist"><i class="bi bi-plus-circle"></i></button>
+                <button id="equalizer-button"       class="action-btn" title="Equalizzatore"><i class="bi bi-sliders"></i></button>
+            </div>
         </div>
-        <div class="equalizer">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
+
+    </div>
+
+    <!-- Pannello Equalizzatore -->
+    <div id="equalizer-panel" class="equalizer-panel">
+        <div class="eq-header">
+            <h3><i class="bi bi-sliders"></i> Equalizzatore</h3>
+            <div class="eq-header-controls">
+                <select class="preset-selector" id="preset-selector">
+                    <option value="normale">Normale</option>
+                    <option value="rock">Rock</option>
+                    <option value="pop">Pop</option>
+                    <option value="jazz">Jazz</option>
+                    <option value="classica">Classica</option>
+                    <option value="elettronica">Elettronica</option>
+                    <option value="bass-boost">Bass Boost</option>
+                    <option value="vocal">Vocal</option>
+                </select>
+                <button class="eq-close-btn" id="eq-close-btn">×</button>
+            </div>
         </div>
-        <button id="like-button" class="like-button"><i class="bi bi-heart"></i></button>
+        <div class="eq-content">
+            <div class="frequency-section">
+                <h4>Frequenze</h4>
+                <div class="frequency-sliders">
+                    <div class="freq-slider-group"><label>60Hz</label><input type="range" class="freq-slider" data-frequency="60"    min="-20" max="20" value="0" step="0.5"><span class="freq-value">0dB</span></div>
+                    <div class="freq-slider-group"><label>170Hz</label><input type="range" class="freq-slider" data-frequency="170"  min="-20" max="20" value="0" step="0.5"><span class="freq-value">0dB</span></div>
+                    <div class="freq-slider-group"><label>310Hz</label><input type="range" class="freq-slider" data-frequency="310"  min="-20" max="20" value="0" step="0.5"><span class="freq-value">0dB</span></div>
+                    <div class="freq-slider-group"><label>600Hz</label><input type="range" class="freq-slider" data-frequency="600"  min="-20" max="20" value="0" step="0.5"><span class="freq-value">0dB</span></div>
+                    <div class="freq-slider-group"><label>1kHz</label><input type="range"  class="freq-slider" data-frequency="1000" min="-20" max="20" value="0" step="0.5"><span class="freq-value">0dB</span></div>
+                    <div class="freq-slider-group"><label>3kHz</label><input type="range"  class="freq-slider" data-frequency="3000" min="-20" max="20" value="0" step="0.5"><span class="freq-value">0dB</span></div>
+                    <div class="freq-slider-group"><label>6kHz</label><input type="range"  class="freq-slider" data-frequency="6000" min="-20" max="20" value="0" step="0.5"><span class="freq-value">0dB</span></div>
+                    <div class="freq-slider-group"><label>12kHz</label><input type="range" class="freq-slider" data-frequency="12000" min="-20" max="20" value="0" step="0.5"><span class="freq-value">0dB</span></div>
+                    <div class="freq-slider-group"><label>14kHz</label><input type="range" class="freq-slider" data-frequency="14000" min="-20" max="20" value="0" step="0.5"><span class="freq-value">0dB</span></div>
+                    <div class="freq-slider-group"><label>16kHz</label><input type="range" class="freq-slider" data-frequency="16000" min="-20" max="20" value="0" step="0.5"><span class="freq-value">0dB</span></div>
+                </div>
+            </div>
+            <div class="bass-treble-section">
+                <h4>Bass &amp; Treble</h4>
+                <div class="bass-treble-controls">
+                    <div class="bass-control">
+                        <label for="bass-knob">Bass</label>
+                        <div class="knob-container">
+                            <input type="range" id="bass-knob" class="knob" min="-20" max="20" value="0" step="1">
+                            <span class="knob-value" id="bass-value">0dB</span>
+                        </div>
+                    </div>
+                    <div class="treble-control">
+                        <label for="treble-knob">Treble</label>
+                        <div class="knob-container">
+                            <input type="range" id="treble-knob" class="knob" min="-20" max="20" value="0" step="1">
+                            <span class="knob-value" id="treble-value">0dB</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="effects-section">
+                <h4>Effetti Audio</h4>
+                <div class="effects-controls">
+                    <div class="effect-group">
+                        <div class="effect-toggle">
+                            <label class="switch"><input type="checkbox" id="reverb-toggle"><span class="slider round"></span></label>
+                            <span>Reverb</span>
+                        </div>
+                        <div class="effect-controls" id="reverb-controls">
+                            <select id="reverb-type"><option value="room">Room</option><option value="hall">Hall</option><option value="cathedral">Cathedral</option><option value="studio">Studio</option></select>
+                            <div class="control-group"><label>Mix</label><input type="range" id="reverb-mix" min="0" max="100" value="30" step="1"><span id="reverb-mix-value">30%</span></div>
+                        </div>
+                    </div>
+                    <div class="effect-group">
+                        <div class="effect-toggle">
+                            <label class="switch"><input type="checkbox" id="echo-toggle"><span class="slider round"></span></label>
+                            <span>Echo</span>
+                        </div>
+                        <div class="effect-controls" id="echo-controls">
+                            <div class="control-group"><label>Delay</label><input type="range" id="echo-delay" min="50" max="1000" value="250" step="10"><span id="echo-delay-value">250ms</span></div>
+                            <div class="control-group"><label>Feedback</label><input type="range" id="echo-feedback" min="0" max="70" value="25" step="1"><span id="echo-feedback-value">25%</span></div>
+                            <div class="control-group"><label>Mix</label><input type="range" id="echo-mix" min="0" max="50" value="20" step="1"><span id="echo-mix-value">20%</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="spectrum-section">
+                <h4>Analizzatore di Spettro</h4>
+                <div class="spectrum-analyzer">
+                    <canvas id="spectrum-canvas" width="300" height="100"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="eq-actions">
+            <button class="eq-btn reset-btn"       id="eq-reset-btn">Reset</button>
+            <button class="eq-btn save-preset-btn" id="save-preset-btn">Salva Preset</button>
+        </div>
     </div>
 
     <audio id="audio-player" src=""></audio>
@@ -124,86 +230,62 @@
         <p>© 2024 Minerify - Tutti i diritti riservati</p>
     </footer>
 
-    <!-- Modal di Accesso Richiesto -->
-    <div id="login-modal" class="modal-login-required" style="display: none;">
+    <!-- Modal login richiesto -->
+    <div id="login-modal" class="modal-login-required" style="display:none;">
         <div class="modal-login-content">
             <div class="modal-login-header">
                 <h2>Accesso Richiesto</h2>
                 <button class="modal-login-close" id="close-login-modal">&times;</button>
             </div>
             <div class="modal-login-body">
-                <p>Per ascoltare la musica, devi prima eseguire l'accesso al tuo account.</p>
+                <p>Per ascoltare la musica devi prima eseguire l'accesso al tuo account.</p>
             </div>
             <div class="modal-login-footer">
-                <button class="modal-login-btn cancel" id="cancel-login-modal">Annulla</button>
+                <button class="modal-login-btn cancel"  id="cancel-login-modal">Annulla</button>
                 <button class="modal-login-btn primary" id="go-to-login">Vai al Login</button>
             </div>
         </div>
     </div>
 
     <script>
-        // ========== GESTIONE PROFILO UTENTE ==========
-        function initializeUserProfile() {
-            const userAvatar = document.getElementById('user-avatar');
+        // === PROFILO UTENTE ===
+        document.addEventListener('DOMContentLoaded', () => {
+            const userAvatar   = document.getElementById('user-avatar');
             const userMenuName = document.getElementById('user-menu-name');
-            const logoutBtn = document.getElementById('logout-btn');
-            const currentUserStr = localStorage.getItem('currentUser');
+            const logoutBtn    = document.getElementById('logout-btn');
 
-            if (currentUserStr) {
-                try {
-                    const currentUser = JSON.parse(currentUserStr);
-                    const username = currentUser.nome || 'Utente';
-                    
-                    // Mostra l'iniziale nel cerchio
-                    const firstLetter = username.charAt(0).toUpperCase();
-                    userAvatar.textContent = firstLetter;
-                    
-                    // Mostra il nome nel dropdown
-                    userMenuName.textContent = username;
-                } catch (e) {
-                    console.error('Errore nel parsing dell\'utente:', e);
+            try {
+                const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+                if (currentUser) {
+                    const name = currentUser.nome || 'Utente';
+                    userAvatar.textContent   = name.charAt(0).toUpperCase();
+                    userMenuName.textContent = name;
                 }
-            }
+            } catch(e) { console.error('Errore parsing utente:', e); }
 
-            // Logout
             logoutBtn?.addEventListener('click', () => {
                 localStorage.removeItem('currentUser');
                 localStorage.removeItem('playerState');
                 window.location.href = '../accesso_pagina/accedi/accedi.html';
             });
-        }
+        });
 
-        // Inizializza il profilo utente al caricamento
-        document.addEventListener('DOMContentLoaded', initializeUserProfile);
-    </script>
-
-    <script>
-        // Gestisci i click sui bottoni play con controllo di autenticazione
-        document.addEventListener('click', (event) => {
-            if (event.target.id === 'play-pause') {
-                const currentUser = localStorage.getItem('currentUser');
-                
-                if (!currentUser) {
-                    // Mostra la modale di login
-                    event.preventDefault();
-                    event.stopPropagation();
-                    const loginModal = document.getElementById('login-modal');
-                    loginModal.style.display = 'flex';
+        // === MODAL LOGIN ===
+        document.addEventListener('click', (e) => {
+            if (e.target.id === 'play-pause') {
+                if (!localStorage.getItem('currentUser')) {
+                    e.preventDefault(); e.stopPropagation();
+                    document.getElementById('login-modal').style.display = 'flex';
                 }
             }
-        }, true); // Usa capture phase per intercettare prima il click
+        }, true);
 
-        // Chiudi modale al clic su "Annulla"
         document.getElementById('cancel-login-modal')?.addEventListener('click', () => {
             document.getElementById('login-modal').style.display = 'none';
         });
-
-        // Chiudi modale al clic sulla X
         document.getElementById('close-login-modal')?.addEventListener('click', () => {
             document.getElementById('login-modal').style.display = 'none';
         });
-
-        // Reindirizza al login al clic su "Vai al Login"
         document.getElementById('go-to-login')?.addEventListener('click', () => {
             window.location.href = '../accesso_pagina/accedi/accedi.html';
         });

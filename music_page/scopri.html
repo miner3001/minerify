@@ -1,562 +1,574 @@
-<!DOCTYPE html>
-<html lang="it">
+    <html lang="it">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Scopri - Minerify</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
-        crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="scopri.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="icon" href="../img/spotifyLogo.jpg" type="image/x-icon">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Scopri - Minerify</title>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO"
+            crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="scopri.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+        <link rel="icon" href="../img/spotifyLogo.jpg" type="image/x-icon">
+    </head>
 
-<body>
+    <body>
 
-    <header>
-        <h1>Minerify</h1>
-        <div class="user-profile-container">
-            <div class="user-profile" id="user-profile">
-                <div class="user-avatar" id="user-avatar">U</div>
-                <div class="user-menu" id="user-menu">
-                    <div class="user-menu-header">
-                        <p id="user-menu-name">Utente</p>
+        <header>
+            <h1>Minerify</h1>
+            <div class="user-profile-container">
+                <div class="user-profile" id="user-profile">
+                    <div class="user-avatar" id="user-avatar">U</div>
+                    <div class="user-menu" id="user-menu">
+                        <div class="user-menu-header">
+                            <p id="user-menu-name">Utente</p>
+                        </div>
+                        <button class="user-menu-logout" id="logout-btn">
+                            <i class="bi bi-box-arrow-right"></i> Esci
+                        </button>
                     </div>
-                    <button class="user-menu-logout" id="logout-btn">
-                        <i class="bi bi-box-arrow-right"></i> Esci
+                </div>
+            </div>
+            <button class="hamburger-menu" aria-label="Menu" aria-expanded="false">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </header>
+
+        <nav class="nav">
+            <a href="../index.html"><i class="bi bi-house-door"></i> Home</a>
+            <a href="../music_page/scopri.html"><i class="bi bi-compass"></i> Scopri</a>
+            <a href="../music_page/playlist.html"><i class="bi bi-collection-play"></i> La tua libreria</a>
+            <a href="../pagamento/premium.html"><i class="bi bi-gem"></i> Premium</a>
+        </nav>
+
+        <div class="search-container">
+            <input type="text" id="search-bar" placeholder="Cerca album o canzoni...">
+            <div class="search-results" id="search-results"></div>
+        </div>
+
+        <div class="discover-section container-sm">
+            <h2>Scopri nuova musica</h2>
+            <p>Esplora album, playlist e artisti per ogni momento.</p>
+            <button class="listen-now listen-now-main">Ascolta Ora </button>
+            <div class="album-container">
+                <div class="album-card" data-year="2023" data-artist="Baby Gang">
+                    <img src="../img/innocente.jpeg" alt="Baby gang - Innocente">
+                    <h3>Innocente - Baby gang</h3>
+                    <button class="listen-now"
+                        data-src="music/1.mp3,music/2.mp3,music/3.mp3,music/4.mp3,music/5.mp3,music/61.mp3,music/62.mp3,music/63.mp3,music/64.mp3,music/65.mp3,music/66.mp3,music/67.mp3,music/68.mp3,music/69.mp3,music/70.mp3,music/71.mp3,music/72.mp3,music/73.mp3"
+                        data-names="Bentley - Baby Gang (ft. Simba La Rue), Libertad - Baby Gang (ft. Morad), Mocro Mafia - Baby Gang (ft. Maes), Schumacher - Baby Gang, Cella 4 - 2nd Roof, Napoletano - 2nd Roof, Que Lo Ke - BOBO, Tony Montana - Guè (ft. BOBO), Gustavo - Lacrim (ft. FT Kings), Barrio - BOBO, Come Mai - Emis Killa (ft. BOBO), Mama Africa - Rondo Da Sosa (ft. BOBO), Amigo - Elai (ft. BOBO), Freestyle 2 - BOBO, Pussy - BOBO, Reggaeton - Baby K (ft. BOBO), Tiffany - Ghali (ft. BOBO), Restare - Lazza">
+                        Ascolta ora
+                    </button>
+                </div>
+                <div class="album-card" data-year="2018" data-artist="Travis Scott">
+                    <img src="../img/astroworld.jpeg" alt="Astroworld - Travis Scott">
+                    <h3>Astroworld - Travis Scott</h3>
+                    <button class="listen-now"
+                        data-src="music/6.mp3,music/7.mp3,music/8.mp3,music/9.mp3,music/10.mp3,music/74.mp3,music/75.mp3,music/76.mp3,music/77.mp3,music/78.mp3,music/79.mp3,music/80.mp3,music/81.mp3,music/82.mp3,music/83.mp3,music/84.mp3,music/85.mp3,music/85.mp3,music/86.mp3"
+                        data-names="BUTTERFLY EFFECT - Travis Scott, Sicko Mode - Travis Scott, Skeletons - Travis Scott, 5% TINT - Travis Scott, ZEZE - Travis Scott, STARGAZING - Travis Scott, CAROUSEL (Ft. Frank Ocean) - Travis Scott, R.I.P. SCREW (Ft. Swae Lee) - Travis Scott, STOP TRYING TO BE GOD (Ft. James Blake, Kid Cudi & Philip Bailey) - Travis Scott, NO BYSTANDERS (Ft. Juice WRLD & Sheck Wes) - Travis Scott, WAKE UP (Ft. The Weeknd) - Travis Scott, NC-17 (Ft. 21 Savage) - Travis Scott, ASTROTHUNDER - Travis Scott, YOSEMITE (Ft. Gunna & NAV) - Travis Scott, CAN'T SAY (Ft. Don Toliver) - Travis Scott, WHO? WHAT! (Ft. Quavo & Takeoff) - Travis Scott, HOUSTONFORNICATION - Travis Scott, COFFEE BEAN - Travis Scott">
+                        Ascolta ora
+                    </button>
+                </div>
+                <div class="album-card" data-year="2022" data-artist="Kid Yugi">
+                    <img src="../img/theglobe.jpeg" alt="The Globe - Kid Yugi">
+                    <h3>The Globe - Kid Yugi</h3>
+                    <button class="listen-now"
+                        data-src="music/11.mp3,music/12.mp3,music/13.mp3,music/14.mp3,music/15.mp3,music/93.mp3,music/94.mp3,music/95.mp3,music/96.mp3,music/97.mp3,music/98.mp3,music/99.mp3"
+                        data-names="DEM - Kid Yugi (ft. Artie 5ive & Tony Boy), GRAMMELOT - Kid Yugi, Il Ferro di Čechov - Kid Yugi, Il Filmografo - Kid Yugi, Yung 3P 3 - Kid Yugi, Hybris - Kid Yugi, Kabuki - Kid Yugi, No Gimmick - Kid Yugi, Sturm und drang - Kid Yugi, Back n' Forth (ft. Kira) - Kid Yugi, King Lear (ft. Sosa Priority) - Kid Yugi, Paradise Now - Kid Yugi">
+                        Ascolta ora
+                    </button>
+                </div>
+                <div class="album-card" data-year="2018" data-artist="Sfera Ebbasta">
+                    <img src="../img/Rockstar.jpg" alt="Rockstar - Sfera Ebbasta">
+                    <h3>Rockstar - Sfera Ebbasta</h3>
+                    <button class="listen-now"
+                        data-src="music/16.mp3,music/17.mp3,music/18.mp3,music/19.mp3,music/20.mp3,music/87.mp3,music/88.mp3,music/89.mp3,music/90.mp3,music/91.mp3,music/92.mp3,music"
+                        data-names="Ricchi x Sempre - Sfera Ebbasta, Sciroppo (ft DrefGold) - Sfera Ebbasta, Tran Tran - Sfera Ebbasta, Bancomat - Sfera Ebbasta, Serpenti a sonagli - Sfera Ebbasta, Uber - Sfera Ebbasta, Leggenda - Sfera Ebbasta, Rockstar - Sfera Ebbasta, 20 Collane - Sfera Ebbasta, Cupido (ft Quavo) - Sfera Ebbasta,XNX - Sfera Ebbasta">
+                        Ascolta ora
+                    </button>
+                </div>
+                <div class="album-card" data-year="2022" data-artist="Baby Gang">
+                    <img src="../img/ep2.jpg" alt="Ep2 - Baby Gang">
+                    <h3>‎ Ep2 - Baby Gang‎ ‎ ‎ ‎ ‎ ‎ </h3>
+                    <button class="listen-now"
+                        data-src="music/21.mp3,music/22.mp3,music/23.mp3,music/24.mp3,music/25.mp3,music/26.mp3,music/27.mp3,music/28.mp3"
+                        data-names="Paranoia - Baby Gang, Combattere - Baby Gang, Carico - Baby Gang, 2000 - Baby Gang, Cella 3 - Baby Gang, Mentalité - Baby Gang, Lei - Baby Gang, Mamacita - Baby Gang">Ascolta
+                        ora</button>
+                </div>
+                <div class="album-card" data-year="2023" data-artist="Travis Scott">
+                    <img src="../img/utopia.jpg" alt="Utopia - Travis Scott">
+                    <h3>Utopia - Travis Scott</h3>
+                    <button class="listen-now"
+                        data-src="music/29.mp3,music/30.mp3,music/31.mp3,music/32.mp3,music/33.mp3,music/34.mp3,music/35.mp3,music/36.mp3,music/37.mp3,music/38.mp3,music/39.mp3,music/40.mp3,music/41.mp3,music/42.mp3,music/43.mp3,music/44.mp3,music/45.mp3,music/46.mp3"
+                        data-names="HYAENA - Travis Scott, THANK GOD - Travis Scott, MODERN JAM (Ft. Teezo Touchdown) - Travis Scott, MY EYES - Travis Scott, GOD’S COUNTRY - Travis Scott, SIRENS - Travis Scott, MELTDOWN (Ft. Drake) - Travis Scott, FE!N (Ft. Playboi Carti) - Travis Scott, DELRESTO (ECHOES) by Beyoncé & Travis Scott, I KNOW ? - Travis Scott, TOPIA TWINS (Ft. 21 Savage & Rob49) - Travis Scott, CIRCUS MAXIMUS (Ft. Swae Lee & The Weeknd) - Travis Scott, PARASAIL (Ft. Dave Chappelle & Yung Lean) - Travis Scott, SKITZO (Ft. Young Thug) - Travis Scott, LOST FOREVER (Ft. Westside Gunn) - Travis Scott, LOOOVE (Ft. Kid Cudi) - Travis Scott, K-POP (Ft. Bad Bunny & The Weeknd) - Travis Scott, TELEKINESIS (Ft. Future & SZA) - Travis Scott">
+                        Ascolta ora
+                    </button>
+                </div>
+                <div class="album-card" data-year="2018" data-artist="Capo Plaza">
+                    <img src="../img/21.png" alt="20 - Capo Plaza">
+                    <h3>‎ 20 - Capo Plaza‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ </h3>
+                    <button class="listen-now"
+                        data-src="music/47.mp3,music/48.mp3,music/49.mp3,music/50.mp3,music/51.mp3,music/52.mp3,music/53.mp3,music/54.mp3,music/55.mp3,music/56.mp3,music/57.mp3,music/58.mp3,music/59.mp3,music/60.mp3"
+                        data-names="20 - Capo Plaza, Giù da me - Capo Plaza, Tesla (Ft. DrefGold & Sfera Ebbasta) - Capo Plaza, Nike Boy - Capo Plaza, Come me - Capo Plaza, J$ JP - Capo Plaza, Interlude (Ora è la mia ora) - Capo Plaza, Ne è valsa la pena (Ft. Ghali) - Capo Plaza, Non cambierò mai - Capo Plaza, Taxi - Capo Plaza, Uno squillo - Capo Plaza, Vabbene - Capo Plaza, Forte e chiaro - Capo Plaza, Giovane fuoriclasse - Capo Plaza">
+                        Ascolta ora
+                    </button>
+
+                </div>
+                <div class="album-card" data-year="2024" data-artist="Kid Yugi">
+                    <img src="../img/i nomi del diavolo.jpg" alt="Kid Yugi - I Nomi del Diavolo">
+                    <h3>I nomi del diavolo-Kid Yugi</h3>
+                    <button class="listen-now"
+                        data-src="music/100.mp3,music/101.mp3,music/102.mp3,music/103.mp3,music/104.mp3,music/105.mp3,music/106.mp3,music/107.mp3,music/108.mp3,music/109.mp3,music/110.mp3,music/111.mp3,music/112.mp3,music/113.mp3"
+                        data-names="L’Anticristo - Kid Yugi, Capra a tre Teste (Ft. Artie 5ive & Tony Boy) - Kid Yugi, Eva (Ft. Tedua) - Kid Yugi, Servizio (Ft. Noyz Narcos & Papa V) - Kid Yugi, Il Signore delle Mosche - Kid Yugi, Lilith - Kid Yugi, Nemico (Ft. Ernia) - Kid Yugi, Denaro (Ft. Simba La Rue) - Kid Yugi, Yung 3p 4 - Kid Yugi, Terr1 (Ft. Geolier) - Kid Yugi, Ilva (Fume scure rmx) (Ft. Fido Guido) - Kid Yugi, Paganini - Kid Yugi, Ex Angelo (Ft. Sfera Ebbasta) - Kid Yugi, Lucifero - Kid Yugi">
+                        Ascolta ora
+                    </button>
+                </div>
+                <div class="album-card" data-year="2023" data-artist="Morad">
+                    <img src="../img/Morad.jpg" alt="Reinsertado - Morad">
+                    <h3>Reinsertado - Morad</h3>
+                    <button class="listen-now"
+                        data-src="music/114.mp3,music/115.mp3,music/116.mp3,music/117.mp3,music/118.mp3,music/119.mp3,music/120.mp3,music/121.mp3,music/122.mp3,music/123.mp3,music/124.mp3,music/125.mp3,music/126.mp3,music/127.mp3,music/128.mp3,music/129.mp3,music/130.mp3,music/131.mp3,music/132.mp3"
+                        data-names="Cristales, Paz, Mi Barrio, No Estuviste En Lo Malo, Andando, Soledad, Estopa, Niños Pequeños, Maria, Poporopa, Se Grita, Por Los Mios, Ojos Sin Ver, Desespero, Problemi, Walou bla bla, Un Amigo Me Falló, Tiempo de Nada, Caballero">
+                        Ascolta ora
+                    </button>
+                </div>
+                <div class="album-card" data-year="2024" data-artist="167 Gang">
+                    <img src="../img/167.png" alt="In piazza ci muori - 167 Gang">
+                    <h3>In piazza ci muori -167Gang</h3>
+                    <button class="listen-now"
+                        data-src="music/133.mp3,music/134.mp3,music/135.mp3,music/136.mp3,music/137.mp3,music/138.mp3,music/139.mp3,music/140.mp3,music/141.mp3,music/142.mp3"
+                        data-names="Napoletano - 167 Gang, Piazza di spaccio 2 (Ft. Simba La Rue) - 167 Gang, Fuori Milano - 167 Gang, Regole del blocco (Ft. Sacky) - 167 Gang, Gomorra (Ft. Artie 5ive) - 167 Gang, Gucci bag - 167 Gang, Gangsta life (Ft. Fre_nky & MadPrince (ITA)) - 167 Gang, Piove (Ft. Neima Ezza) - 167 Gang, Sotto indagine (Ft. Savage 167) - 167 Gang, L’ultima notte - 167 Gang">
+                        Ascolta ora
+                    </button>
+                </div>
+                <div class="album-card" data-year="2019" data-artist="FSK SATELLITE">
+                    <img src="../img/FSK.jpg" alt="FSK TRAPSHIT REVENGE - FSK SATELLITE">
+                    <h3>FSK TRAPSHIT-FSKSATELLITE</h3>
+                    <button class="listen-now"
+                        data-src="music/143.mp3,music/144.mp3,music/145.mp3,music/146.mp3,music/147.mp3,music/148.mp3,music/149.mp3,music/150.mp3,music/151.mp3,music/152.mp3,music/153.mp3,music/154.mp3,music/155.mp3,music/156.mp3,music/157.mp3,music/158.mp3,music/159.mp3,music/160.mp3"
+                        data-names="BLA BLA - FSK SATELLITE, ANSIA NO - FSK SATELLITE, CAMOSCIO - FSK SATELLITE, CAPI DELLA TRAP (Ft. Guè) - FSK SATELLITE, NON FARCELO FARE - FSK SATELLITE, FRAGOLA EROINA - FSK SATELLITE, PIÙ DI UN KILO - FSK SATELLITE, UP - FSK SATELLITE, NO SPIE - FSK SATELLITE, CATENE JESUS - FSK SATELLITE, 4L (Ft. Rosa Chemical) - FSK SATELLITE, OK NO PLAY - FSK SATELLITE, LA PROVA DEL CUOCO - FSK SATELLITE, MELISSA P - FSK SATELLITE, NON E' MIA - FSK SATELLITE, CANOTTIERA WHITE - FSK SATELLITE, ABBIAMO - FSK SATELLITE, PICKUP (Ft. DAYTONA KK) - FSK SATELLITE">
+                        Ascolta ora
+                    </button>
+                </div>
+                <div class="album-card" data-year="2022" data-artist="Shiva">
+                    <img src="../img/Milano.jpg" alt="Milano demons - Shiva">
+                    <h3>Milano demons - Shiva </h3>
+                    <button class="listen-now"
+                        data-src="music/161.mp3,music/162.mp3,music/163.mp3,music/164.mp3,music/165.mp3,music/166.mp3,music/167.mp3,music/168.mp3,music/169.mp3,music/170.mp3,music/171.mp3,music/172.mp3,music/173.mp3,music/174.mp3,music/175.mp3,music/176.mp3,music/177.mp3,music/178.mp3"
+                        data-names="Milano Demons - Shiva, Cup - Shiva, Vorrei (Ft. Lazza) - Shiva, Take 4 - Shiva, Rollie AP (Ft. Pyrex (ITA) & Slings) - Shiva, Cellphone (Ft. Bianca Costa & Rhove) - Shiva, Diamante - Shiva, Non è Easy - Shiva, Messaggio in Segreteria (interlude) - Shiva, Cicatrici (Ft. Tedua) - Shiva, Non lo Sai - Shiva, Naturale - Shiva, Alleluia (Ft. Sfera Ebbasta) - Shiva, Soldi Puliti - Shiva, Dimenticare (Ft. Federica Abbate) - Shiva, Un Altro Show (Ft. Geolier) - Shiva, Se Fosse Per Me - Shiva, 3 Stick Freestyle - Shiva">
+                        Ascolta ora
+                    </button>
+                </div>
+                <div class="album-card" data-year="2016" data-artist="Sfera Ebbasta">
+                    <img src="../img/sfera.jpg" alt="Sfera Ebbasta -Sfera Ebbasta">
+                    <h3>Sfera Ebbasta -Sfera Ebbasta</h3>
+                    <button class="listen-now"
+                        data-src="music/179.mp3,music/180.mp3,music/181.mp3,music/182.mp3,music/183.mp3,music/184.mp3,music/185.mp3,music/186.mp3,music/187.mp3,music/188.mp3,music/189.mp3"
+                        data-names="Equilibrio - Sfera Ebbasta, Figli Di Papà - Sfera Ebbasta, Balenciaga (Ft. SCH) - Sfera Ebbasta, Notti - Sfera Ebbasta, Visiera A Becco - Sfera Ebbasta, No No - Sfera Ebbasta, BRNBQ - Sfera Ebbasta, Bang Bang - Sfera Ebbasta, Quello Che Non Va - Sfera Ebbasta, Cartine Cartier by SCH (Ft. Sfera Ebbasta) - Sfera Ebbasta, BHMG - Sfera Ebbasta">
+                        Ascolta ora
+                    </button>
+                </div>
+                <div class="album-card" data-year="2022" data-artist="Paky">
+                    <img src="../img/Salvatore.jpg" alt="Salvatore Vive - Paky">
+                    <h3>Salvatore Vive - Paky</h3>
+                    <button class="listen-now"
+                        data-src="music/190.mp3,music/191.mp3,music/192.mp3,music/193.mp3,music/194.mp3,music/195.mp3,music/196.mp3,music/197.mp3,music/198.mp3,music/199.mp3,music/200.mp3,music/201.mp3,music/202.mp3,music/203.mp3,music/204.mp3,music/205.mp3,music/206.mp3,music/207.mp3,music/208.mp3,music/209.mp3,music/210.mp3,music/211.mp3"
+                        data-names="Salvatore vive - Paky, Belen - Paky, Sharm El Sheikh - Paky, La Bellavita (Ft. JuL) - Paky, Onore e rispetto - Paky, Intro - Paky, 100 Uomini - Paky, Blauer - Paky, No wallet (Ft. Marracash) - Paky, Pascià - Paky, Auto tedesca - Paky, Star (Ft. Shiva) - Paky, Salvatore - Paky, Quando piove - Paky, Vivi o muori (Ft. Guè) - Paky, Vita sbagliata - Paky, Comandamento (Ft. Geolier) - Paky, Giorno del giudizio (Ft. Luchè & Mahmood) - Paky, Mi manchi - Paky, Storie tristi - Paky, Mama I’m a Criminal - Paky, Bronx - Paky">
+                        Ascolta ora
                     </button>
                 </div>
             </div>
         </div>
-        <button class="hamburger-menu" aria-label="Menu" aria-expanded="false">
-            <span class="hamburger-line"></span>
-            <span class="hamburger-line"></span>
-            <span class="hamburger-line"></span>
-        </button>
-    </header>
-
-    <nav class="nav">
-        <a href="../index.html"><i class="bi bi-house-door"></i> Home</a>
-        <a href="../music_page/scopri.html"><i class="bi bi-compass"></i> Scopri</a>
-        <a href="../music_page/playlist.html"><i class="bi bi-collection-play"></i> La tua libreria</a>
-        <a href="../pagamento/premium.html"><i class="bi bi-gem"></i> Premium</a>
-    </nav>
-
-    <div class="search-container">
-        <input type="text" id="search-bar" placeholder="Cerca album o canzoni...">
-        <div class="search-results" id="search-results"></div>
-    </div>
-
-    <div class="discover-section container-sm">
-        <h2>Scopri nuova musica</h2>
-        <p>Esplora album, playlist e artisti per ogni momento.</p>
-        <button class="listen-now listen-now-main">Ascolta Ora </button>
-        <div class="album-container">
-            <div class="album-card" data-year="2023" data-artist="Baby Gang">
-                <img src="../img/innocente.jpeg" alt="Baby gang - Innocente">
-                <h3>Innocente - Baby gang</h3>
-                <button class="listen-now"
-                    data-src="music/1.mp3,music/2.mp3,music/3.mp3,music/4.mp3,music/5.mp3,music/61.mp3,music/62.mp3,music/63.mp3,music/64.mp3,music/65.mp3,music/66.mp3,music/67.mp3,music/68.mp3,music/69.mp3,music/70.mp3,music/71.mp3,music/72.mp3,music/73.mp3"
-                    data-names="Bentley - Baby Gang (ft. Simba La Rue), Libertad - Baby Gang (ft. Morad), Mocro Mafia - Baby Gang (ft. Maes), Schumacher - Baby Gang, Cella 4 - 2nd Roof, Napoletano - 2nd Roof, Que Lo Ke - BOBO, Tony Montana - Guè (ft. BOBO), Gustavo - Lacrim (ft. FT Kings), Barrio - BOBO, Come Mai - Emis Killa (ft. BOBO), Mama Africa - Rondo Da Sosa (ft. BOBO), Amigo - Elai (ft. BOBO), Freestyle 2 - BOBO, Pussy - BOBO, Reggaeton - Baby K (ft. BOBO), Tiffany - Ghali (ft. BOBO), Restare - Lazza">
-                    Ascolta ora
-                </button>
-            </div>
-            <div class="album-card" data-year="2018" data-artist="Travis Scott">
-                <img src="../img/astroworld.jpeg" alt="Astroworld - Travis Scott">
-                <h3>Astroworld - Travis Scott</h3>
-                <button class="listen-now"
-                    data-src="music/6.mp3,music/7.mp3,music/8.mp3,music/9.mp3,music/10.mp3,music/74.mp3,music/75.mp3,music/76.mp3,music/77.mp3,music/78.mp3,music/79.mp3,music/80.mp3,music/81.mp3,music/82.mp3,music/83.mp3,music/84.mp3,music/85.mp3,music/85.mp3,music/86.mp3"
-                    data-names="BUTTERFLY EFFECT - Travis Scott, Sicko Mode - Travis Scott, Skeletons - Travis Scott, 5% TINT - Travis Scott, ZEZE - Travis Scott, STARGAZING - Travis Scott, CAROUSEL (Ft. Frank Ocean) - Travis Scott, R.I.P. SCREW (Ft. Swae Lee) - Travis Scott, STOP TRYING TO BE GOD (Ft. James Blake, Kid Cudi & Philip Bailey) - Travis Scott, NO BYSTANDERS (Ft. Juice WRLD & Sheck Wes) - Travis Scott, WAKE UP (Ft. The Weeknd) - Travis Scott, NC-17 (Ft. 21 Savage) - Travis Scott, ASTROTHUNDER - Travis Scott, YOSEMITE (Ft. Gunna & NAV) - Travis Scott, CAN'T SAY (Ft. Don Toliver) - Travis Scott, WHO? WHAT! (Ft. Quavo & Takeoff) - Travis Scott, HOUSTONFORNICATION - Travis Scott, COFFEE BEAN - Travis Scott">
-                    Ascolta ora
-                </button>
-            </div>
-            <div class="album-card" data-year="2022" data-artist="Kid Yugi">
-                <img src="../img/theglobe.jpeg" alt="The Globe - Kid Yugi">
-                <h3>The Globe - Kid Yugi</h3>
-                <button class="listen-now"
-                    data-src="music/11.mp3,music/12.mp3,music/13.mp3,music/14.mp3,music/15.mp3,music/93.mp3,music/94.mp3,music/95.mp3,music/96.mp3,music/97.mp3,music/98.mp3,music/99.mp3"
-                    data-names="DEM - Kid Yugi (ft. Artie 5ive & Tony Boy), GRAMMELOT - Kid Yugi, Il Ferro di Čechov - Kid Yugi, Il Filmografo - Kid Yugi, Yung 3P 3 - Kid Yugi, Hybris - Kid Yugi, Kabuki - Kid Yugi, No Gimmick - Kid Yugi, Sturm und drang - Kid Yugi, Back n' Forth (ft. Kira) - Kid Yugi, King Lear (ft. Sosa Priority) - Kid Yugi, Paradise Now - Kid Yugi">
-                    Ascolta ora
-                </button>
-            </div>
-            <div class="album-card" data-year="2018" data-artist="Sfera Ebbasta">
-                <img src="../img/Rockstar.jpg" alt="Rockstar - Sfera Ebbasta">
-                <h3>Rockstar - Sfera Ebbasta</h3>
-                <button class="listen-now"
-                    data-src="music/16.mp3,music/17.mp3,music/18.mp3,music/19.mp3,music/20.mp3,music/87.mp3,music/88.mp3,music/89.mp3,music/90.mp3,music/91.mp3,music/92.mp3,music"
-                    data-names="Ricchi x Sempre - Sfera Ebbasta, Sciroppo (ft DrefGold) - Sfera Ebbasta, Tran Tran - Sfera Ebbasta, Bancomat - Sfera Ebbasta, Serpenti a sonagli - Sfera Ebbasta, Uber - Sfera Ebbasta, Leggenda - Sfera Ebbasta, Rockstar - Sfera Ebbasta, 20 Collane - Sfera Ebbasta, Cupido (ft Quavo) - Sfera Ebbasta,XNX - Sfera Ebbasta">
-                    Ascolta ora
-                </button>
-            </div>
-            <div class="album-card" data-year="2022" data-artist="Baby Gang">
-                <img src="../img/ep2.jpg" alt="Ep2 - Baby Gang">
-                <h3>‎ Ep2 - Baby Gang‎ ‎ ‎ ‎ ‎ ‎ </h3>
-                <button class="listen-now"
-                    data-src="music/21.mp3,music/22.mp3,music/23.mp3,music/24.mp3,music/25.mp3,music/26.mp3,music/27.mp3,music/28.mp3"
-                    data-names="Paranoia - Baby Gang, Combattere - Baby Gang, Carico - Baby Gang, 2000 - Baby Gang, Cella 3 - Baby Gang, Mentalité - Baby Gang, Lei - Baby Gang, Mamacita - Baby Gang">Ascolta
-                    ora</button>
-            </div>
-            <div class="album-card" data-year="2023" data-artist="Travis Scott">
-                <img src="../img/utopia.jpg" alt="Utopia - Travis Scott">
-                <h3>Utopia - Travis Scott</h3>
-                <button class="listen-now"
-                    data-src="music/29.mp3,music/30.mp3,music/31.mp3,music/32.mp3,music/33.mp3,music/34.mp3,music/35.mp3,music/36.mp3,music/37.mp3,music/38.mp3,music/39.mp3,music/40.mp3,music/41.mp3,music/42.mp3,music/43.mp3,music/44.mp3,music/45.mp3,music/46.mp3"
-                    data-names="HYAENA - Travis Scott, THANK GOD - Travis Scott, MODERN JAM (Ft. Teezo Touchdown) - Travis Scott, MY EYES - Travis Scott, GOD’S COUNTRY - Travis Scott, SIRENS - Travis Scott, MELTDOWN (Ft. Drake) - Travis Scott, FE!N (Ft. Playboi Carti) - Travis Scott, DELRESTO (ECHOES) by Beyoncé & Travis Scott, I KNOW ? - Travis Scott, TOPIA TWINS (Ft. 21 Savage & Rob49) - Travis Scott, CIRCUS MAXIMUS (Ft. Swae Lee & The Weeknd) - Travis Scott, PARASAIL (Ft. Dave Chappelle & Yung Lean) - Travis Scott, SKITZO (Ft. Young Thug) - Travis Scott, LOST FOREVER (Ft. Westside Gunn) - Travis Scott, LOOOVE (Ft. Kid Cudi) - Travis Scott, K-POP (Ft. Bad Bunny & The Weeknd) - Travis Scott, TELEKINESIS (Ft. Future & SZA) - Travis Scott">
-                    Ascolta ora
-                </button>
-            </div>
-            <div class="album-card" data-year="2018" data-artist="Capo Plaza">
-                <img src="../img/21.png" alt="20 - Capo Plaza">
-                <h3>‎ 20 - Capo Plaza‎ ‎ ‎ ‎ ‎ ‎ ‎ ‎ </h3>
-                <button class="listen-now"
-                    data-src="music/47.mp3,music/48.mp3,music/49.mp3,music/50.mp3,music/51.mp3,music/52.mp3,music/53.mp3,music/54.mp3,music/55.mp3,music/56.mp3,music/57.mp3,music/58.mp3,music/59.mp3,music/60.mp3"
-                    data-names="20 - Capo Plaza, Giù da me - Capo Plaza, Tesla (Ft. DrefGold & Sfera Ebbasta) - Capo Plaza, Nike Boy - Capo Plaza, Come me - Capo Plaza, J$ JP - Capo Plaza, Interlude (Ora è la mia ora) - Capo Plaza, Ne è valsa la pena (Ft. Ghali) - Capo Plaza, Non cambierò mai - Capo Plaza, Taxi - Capo Plaza, Uno squillo - Capo Plaza, Vabbene - Capo Plaza, Forte e chiaro - Capo Plaza, Giovane fuoriclasse - Capo Plaza">
-                    Ascolta ora
-                </button>
-
-            </div>
-            <div class="album-card" data-year="2024" data-artist="Kid Yugi">
-                <img src="../img/i nomi del diavolo.jpg" alt="Kid Yugi - I Nomi del Diavolo">
-                <h3>I nomi del diavolo-Kid Yugi</h3>
-                <button class="listen-now"
-                    data-src="music/100.mp3,music/101.mp3,music/102.mp3,music/103.mp3,music/104.mp3,music/105.mp3,music/106.mp3,music/107.mp3,music/108.mp3,music/109.mp3,music/110.mp3,music/111.mp3,music/112.mp3,music/113.mp3"
-                    data-names="L’Anticristo - Kid Yugi, Capra a tre Teste (Ft. Artie 5ive & Tony Boy) - Kid Yugi, Eva (Ft. Tedua) - Kid Yugi, Servizio (Ft. Noyz Narcos & Papa V) - Kid Yugi, Il Signore delle Mosche - Kid Yugi, Lilith - Kid Yugi, Nemico (Ft. Ernia) - Kid Yugi, Denaro (Ft. Simba La Rue) - Kid Yugi, Yung 3p 4 - Kid Yugi, Terr1 (Ft. Geolier) - Kid Yugi, Ilva (Fume scure rmx) (Ft. Fido Guido) - Kid Yugi, Paganini - Kid Yugi, Ex Angelo (Ft. Sfera Ebbasta) - Kid Yugi, Lucifero - Kid Yugi">
-                    Ascolta ora
-                </button>
-            </div>
-            <div class="album-card" data-year="2023" data-artist="Morad">
-                <img src="../img/Morad.jpg" alt="Reinsertado - Morad">
-                <h3>Reinsertado - Morad</h3>
-                <button class="listen-now"
-                    data-src="music/114.mp3,music/115.mp3,music/116.mp3,music/117.mp3,music/118.mp3,music/119.mp3,music/120.mp3,music/121.mp3,music/122.mp3,music/123.mp3,music/124.mp3,music/125.mp3,music/126.mp3,music/127.mp3,music/128.mp3,music/129.mp3,music/130.mp3,music/131.mp3,music/132.mp3"
-                    data-names="Cristales, Paz, Mi Barrio, No Estuviste En Lo Malo, Andando, Soledad, Estopa, Niños Pequeños, Maria, Poporopa, Se Grita, Por Los Mios, Ojos Sin Ver, Desespero, Problemi, Walou bla bla, Un Amigo Me Falló, Tiempo de Nada, Caballero">
-                    Ascolta ora
-                </button>
-            </div>
-            <div class="album-card" data-year="2024" data-artist="167 Gang">
-                <img src="../img/167.png" alt="In piazza ci muori - 167 Gang">
-                <h3>In piazza ci muori -167Gang</h3>
-                <button class="listen-now"
-                    data-src="music/133.mp3,music/134.mp3,music/135.mp3,music/136.mp3,music/137.mp3,music/138.mp3,music/139.mp3,music/140.mp3,music/141.mp3,music/142.mp3"
-                    data-names="Napoletano - 167 Gang, Piazza di spaccio 2 (Ft. Simba La Rue) - 167 Gang, Fuori Milano - 167 Gang, Regole del blocco (Ft. Sacky) - 167 Gang, Gomorra (Ft. Artie 5ive) - 167 Gang, Gucci bag - 167 Gang, Gangsta life (Ft. Fre_nky & MadPrince (ITA)) - 167 Gang, Piove (Ft. Neima Ezza) - 167 Gang, Sotto indagine (Ft. Savage 167) - 167 Gang, L’ultima notte - 167 Gang">
-                    Ascolta ora
-                </button>
-            </div>
-            <div class="album-card" data-year="2019" data-artist="FSK SATELLITE">
-                <img src="../img/FSK.jpg" alt="FSK TRAPSHIT REVENGE - FSK SATELLITE">
-                <h3>FSK TRAPSHIT-FSKSATELLITE</h3>
-                <button class="listen-now"
-                    data-src="music/143.mp3,music/144.mp3,music/145.mp3,music/146.mp3,music/147.mp3,music/148.mp3,music/149.mp3,music/150.mp3,music/151.mp3,music/152.mp3,music/153.mp3,music/154.mp3,music/155.mp3,music/156.mp3,music/157.mp3,music/158.mp3,music/159.mp3,music/160.mp3"
-                    data-names="BLA BLA - FSK SATELLITE, ANSIA NO - FSK SATELLITE, CAMOSCIO - FSK SATELLITE, CAPI DELLA TRAP (Ft. Guè) - FSK SATELLITE, NON FARCELO FARE - FSK SATELLITE, FRAGOLA EROINA - FSK SATELLITE, PIÙ DI UN KILO - FSK SATELLITE, UP - FSK SATELLITE, NO SPIE - FSK SATELLITE, CATENE JESUS - FSK SATELLITE, 4L (Ft. Rosa Chemical) - FSK SATELLITE, OK NO PLAY - FSK SATELLITE, LA PROVA DEL CUOCO - FSK SATELLITE, MELISSA P - FSK SATELLITE, NON E' MIA - FSK SATELLITE, CANOTTIERA WHITE - FSK SATELLITE, ABBIAMO - FSK SATELLITE, PICKUP (Ft. DAYTONA KK) - FSK SATELLITE">
-                    Ascolta ora
-                </button>
-            </div>
-            <div class="album-card" data-year="2022" data-artist="Shiva">
-                <img src="../img/Milano.jpg" alt="Milano demons - Shiva">
-                <h3>Milano demons - Shiva </h3>
-                <button class="listen-now"
-                    data-src="music/161.mp3,music/162.mp3,music/163.mp3,music/164.mp3,music/165.mp3,music/166.mp3,music/167.mp3,music/168.mp3,music/169.mp3,music/170.mp3,music/171.mp3,music/172.mp3,music/173.mp3,music/174.mp3,music/175.mp3,music/176.mp3,music/177.mp3,music/178.mp3"
-                    data-names="Milano Demons - Shiva, Cup - Shiva, Vorrei (Ft. Lazza) - Shiva, Take 4 - Shiva, Rollie AP (Ft. Pyrex (ITA) & Slings) - Shiva, Cellphone (Ft. Bianca Costa & Rhove) - Shiva, Diamante - Shiva, Non è Easy - Shiva, Messaggio in Segreteria (interlude) - Shiva, Cicatrici (Ft. Tedua) - Shiva, Non lo Sai - Shiva, Naturale - Shiva, Alleluia (Ft. Sfera Ebbasta) - Shiva, Soldi Puliti - Shiva, Dimenticare (Ft. Federica Abbate) - Shiva, Un Altro Show (Ft. Geolier) - Shiva, Se Fosse Per Me - Shiva, 3 Stick Freestyle - Shiva">
-                    Ascolta ora
-                </button>
-            </div>
-            <div class="album-card" data-year="2016" data-artist="Sfera Ebbasta">
-                <img src="../img/sfera.jpg" alt="Sfera Ebbasta -Sfera Ebbasta">
-                <h3>Sfera Ebbasta -Sfera Ebbasta</h3>
-                <button class="listen-now"
-                    data-src="music/179.mp3,music/180.mp3,music/181.mp3,music/182.mp3,music/183.mp3,music/184.mp3,music/185.mp3,music/186.mp3,music/187.mp3,music/188.mp3,music/189.mp3"
-                    data-names="Equilibrio - Sfera Ebbasta, Figli Di Papà - Sfera Ebbasta, Balenciaga (Ft. SCH) - Sfera Ebbasta, Notti - Sfera Ebbasta, Visiera A Becco - Sfera Ebbasta, No No - Sfera Ebbasta, BRNBQ - Sfera Ebbasta, Bang Bang - Sfera Ebbasta, Quello Che Non Va - Sfera Ebbasta, Cartine Cartier by SCH (Ft. Sfera Ebbasta) - Sfera Ebbasta, BHMG - Sfera Ebbasta">
-                    Ascolta ora
-                </button>
-            </div>
-            <div class="album-card" data-year="2022" data-artist="Paky">
-                <img src="../img/Salvatore.jpg" alt="Salvatore Vive - Paky">
-                <h3>Salvatore Vive - Paky</h3>
-                <button class="listen-now"
-                    data-src="music/190.mp3,music/191.mp3,music/192.mp3,music/193.mp3,music/194.mp3,music/195.mp3,music/196.mp3,music/197.mp3,music/198.mp3,music/199.mp3,music/200.mp3,music/201.mp3,music/202.mp3,music/203.mp3,music/204.mp3,music/205.mp3,music/206.mp3,music/207.mp3,music/208.mp3,music/209.mp3,music/210.mp3,music/211.mp3"
-                    data-names="Salvatore vive - Paky, Belen - Paky, Sharm El Sheikh - Paky, La Bellavita (Ft. JuL) - Paky, Onore e rispetto - Paky, Intro - Paky, 100 Uomini - Paky, Blauer - Paky, No wallet (Ft. Marracash) - Paky, Pascià - Paky, Auto tedesca - Paky, Star (Ft. Shiva) - Paky, Salvatore - Paky, Quando piove - Paky, Vivi o muori (Ft. Guè) - Paky, Vita sbagliata - Paky, Comandamento (Ft. Geolier) - Paky, Giorno del giudizio (Ft. Luchè & Mahmood) - Paky, Mi manchi - Paky, Storie tristi - Paky, Mama I’m a Criminal - Paky, Bronx - Paky">
-                    Ascolta ora
-                </button>
-            </div>
-        </div>
-    </div>
-    <div id="overlay" class="overlay">
-        <div class="overlay-content">
-            <button class="close-btn" id="close-overlay">&times;</button>
-            <div class="album-details">
-                <img src="" alt="Album Cover">
-                <div class="album-info">
-                    <h2></h2>
-                    <p class="album-year"></p>
-                    <p class="album-artist"></p>
-                </div>
-            </div>
-            <h3>Lista dei brani</h3>
-            <ul id="song-list" class="song-list">
-            </ul>
-        </div>
-    </div>
-
-    <!-- Lyrics Overlay -->
-    <div id="lyrics-overlay" class="lyrics-overlay">
-        <div class="lyrics-overlay-content">
-            <div class="lyrics-header">
-                <h2 id="lyrics-song-title">Testi della canzone</h2>
-                <button class="lyrics-close-btn" id="close-lyrics">&times;</button>
-            </div>
-            <div class="lyrics-controls">
-                <strong>🎵 Controlli Sincronizzazione OTTIMIZZATI</strong><br>
-                <small>
-                    ⬆️⬇️ Regola sync • ⬅️➡️ Vai riga • Shift+⬆️⬇️ Micro-regolazioni<br>
-                    R Reset • S Salva calibrazione • Spazio Play/Pausa • ESC Chiudi<br>
-                    📱 Touch: Swipe verticale (sync) • Swipe orizzontale (righe)
-                </small>
-            </div>
-            <div class="lyrics-container" id="lyrics-container">
-                <div class="lyrics-loading" id="lyrics-loading">
-                    <div class="spinner-border text-light" role="status">
-                        <span class="visually-hidden">Caricamento testi...</span>
+        <div id="overlay" class="overlay">
+            <div class="overlay-content">
+                <button class="close-btn" id="close-overlay">&times;</button>
+                <div class="album-details">
+                    <img src="" alt="Album Cover">
+                    <div class="album-info">
+                        <h2></h2>
+                        <p class="album-year"></p>
+                        <p class="album-artist"></p>
                     </div>
                 </div>
-                <div class="lyrics-content" id="lyrics-content"></div>
-                <div class="lyrics-not-found" id="lyrics-not-found" style="display: none;">
-                    <p>Testi non disponibili per questa canzone</p>
+                <h3>Lista dei brani</h3>
+                <ul id="song-list" class="song-list">
+                </ul>
+            </div>
+        </div>
+
+        <!-- Lyrics Overlay -->
+        <div id="lyrics-overlay" class="lyrics-overlay">
+            <div class="lyrics-overlay-content">
+                <div class="lyrics-header">
+                    <h2 id="lyrics-song-title">Testi della canzone</h2>
+                    <button class="lyrics-close-btn" id="close-lyrics">&times;</button>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <footer class="footer">
-        <p>© 2025 Minerify - Tutti i diritti riservati</p>
-    </footer>
-
-    <div class="stars"></div>
-
-    <div class="player-bar">
-        <div class="player-info">
-            <img id="current-album-cover" src="" alt="Album Cover" class="album-cover">
-            <div class="song-details">
-                <p id="current-song">Nessuna canzone in riproduzione</p>
-            </div>
-        </div>
-        <div class="player-controls">
-            <button id="prev-song"><i class="bi bi-skip-start-fill"></i></button>
-            <button id="play-pause"><i class="bi bi-play-fill"></i></button>
-            <button id="next-song"><i class="bi bi-skip-end-fill"></i></button>
-            <button id="shuffle"><i class="bi bi-shuffle"></i></button>
-            <button id="loop"><i class="bi bi-repeat"></i></button>
-            <span id="current-time">0:00</span>
-            <input type="range" id="progress-bar" value="0" max="100">
-            <span id="total-duration">0:00</span>
-        </div>
-        <div class="volume-controls">
-            <input type="range" id="volume-control" value="50">
-        </div>
-        <div class="equalizer">
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-            <div class="bar"></div>
-        </div>
-        <button id="like-button" class="like-button">❤️</button> <!-- Pulsante per i preferiti -->
-        <button id="add-to-playlist-button" class="add-to-playlist-button" title="Aggiungi alla mia playlist"><i class="bi bi-plus-circle"></i></button>
-        <button id="lyrics-button" class="lyrics-button" title="Visualizza testi"><i class="bi bi-chat-quote"></i></button>
-        <button id="equalizer-button" class="equalizer-button" title="Equalizzatore Audio"><i class="bi bi-sliders"></i></button>
-    </div>
-
-    <!-- Pannello Equalizzatore -->
-    <div id="equalizer-panel" class="equalizer-panel">
-        <div class="eq-header">
-            <h3><i class="bi bi-sliders"></i> Equalizzatore Audio</h3>
-            <div class="eq-header-controls">
-                <select class="preset-selector" id="preset-selector">
-                    <option value="normale">Normale</option>
-                    <option value="rock">Rock</option>
-                    <option value="pop">Pop</option>
-                    <option value="jazz">Jazz</option>
-                    <option value="classica">Classica</option>
-                    <option value="elettronica">Elettronica</option>
-                    <option value="bass-boost">Bass Boost</option>
-                    <option value="vocal">Vocal</option>
-                </select>
-                <button class="eq-close-btn" id="eq-close-btn">×</button>
-            </div>
-        </div>
-        
-        <div class="eq-content">
-            <!-- Sliders delle frequenze -->
-            <div class="frequency-section">
-                <h4>Frequenze</h4>
-                <div class="frequency-sliders">
-                    <div class="freq-slider-group">
-                        <label>60Hz</label>
-                        <input type="range" class="freq-slider" data-frequency="60" min="-20" max="20" value="0" step="0.5">
-                        <span class="freq-value">0dB</span>
-                    </div>
-                    <div class="freq-slider-group">
-                        <label>170Hz</label>
-                        <input type="range" class="freq-slider" data-frequency="170" min="-20" max="20" value="0" step="0.5">
-                        <span class="freq-value">0dB</span>
-                    </div>
-                    <div class="freq-slider-group">
-                        <label>310Hz</label>
-                        <input type="range" class="freq-slider" data-frequency="310" min="-20" max="20" value="0" step="0.5">
-                        <span class="freq-value">0dB</span>
-                    </div>
-                    <div class="freq-slider-group">
-                        <label>600Hz</label>
-                        <input type="range" class="freq-slider" data-frequency="600" min="-20" max="20" value="0" step="0.5">
-                        <span class="freq-value">0dB</span>
-                    </div>
-                    <div class="freq-slider-group">
-                        <label>1kHz</label>
-                        <input type="range" class="freq-slider" data-frequency="1000" min="-20" max="20" value="0" step="0.5">
-                        <span class="freq-value">0dB</span>
-                    </div>
-                    <div class="freq-slider-group">
-                        <label>3kHz</label>
-                        <input type="range" class="freq-slider" data-frequency="3000" min="-20" max="20" value="0" step="0.5">
-                        <span class="freq-value">0dB</span>
-                    </div>
-                    <div class="freq-slider-group">
-                        <label>6kHz</label>
-                        <input type="range" class="freq-slider" data-frequency="6000" min="-20" max="20" value="0" step="0.5">
-                        <span class="freq-value">0dB</span>
-                    </div>
-                    <div class="freq-slider-group">
-                        <label>12kHz</label>
-                        <input type="range" class="freq-slider" data-frequency="12000" min="-20" max="20" value="0" step="0.5">
-                        <span class="freq-value">0dB</span>
-                    </div>
-                    <div class="freq-slider-group">
-                        <label>14kHz</label>
-                        <input type="range" class="freq-slider" data-frequency="14000" min="-20" max="20" value="0" step="0.5">
-                        <span class="freq-value">0dB</span>
-                    </div>
-                    <div class="freq-slider-group">
-                        <label>16kHz</label>
-                        <input type="range" class="freq-slider" data-frequency="16000" min="-20" max="20" value="0" step="0.5">
-                        <span class="freq-value">0dB</span>
-                    </div>
+                <div class="lyrics-controls">
+                    <strong>🎵 Controlli Sincronizzazione OTTIMIZZATI</strong><br>
+                    <small>
+                        ⬆️⬇️ Regola sync • ⬅️➡️ Vai riga • Shift+⬆️⬇️ Micro-regolazioni<br>
+                        R Reset • S Salva calibrazione • Spazio Play/Pausa • ESC Chiudi<br>
+                        📱 Touch: Swipe verticale (sync) • Swipe orizzontale (righe)
+                    </small>
                 </div>
-            </div>
-
-            <!-- Controlli Bass e Treble -->
-            <div class="bass-treble-section">
-                <h4>Bass & Treble</h4>
-                <div class="bass-treble-controls">
-                    <div class="bass-control">
-                        <label for="bass-knob">Bass</label>
-                        <div class="knob-container">
-                            <input type="range" id="bass-knob" class="knob" min="-20" max="20" value="0" step="1">
-                            <span class="knob-value" id="bass-value">0dB</span>
+                <div class="lyrics-container" id="lyrics-container">
+                    <div class="lyrics-loading" id="lyrics-loading">
+                        <div class="spinner-border text-light" role="status">
+                            <span class="visually-hidden">Caricamento testi...</span>
                         </div>
                     </div>
-                    <div class="treble-control">
-                        <label for="treble-knob">Treble</label>
-                        <div class="knob-container">
-                            <input type="range" id="treble-knob" class="knob" min="-20" max="20" value="0" step="1">
-                            <span class="knob-value" id="treble-value">0dB</span>
+                    <div class="lyrics-content" id="lyrics-content"></div>
+                    <div class="lyrics-not-found" id="lyrics-not-found" style="display: none;">
+                        <p>Testi non disponibili per questa canzone</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <p>© 2025 Minerify - Tutti i diritti riservati</p>
+        </footer>
+
+        <div class="stars"></div>
+
+        <div class="player-bar">
+            <div class="player-info">
+                <img id="current-album-cover" src="" alt="Album Cover" class="album-cover">
+                <div class="song-details">
+                    <p id="current-song">Nessuna canzone in riproduzione</p>
+                </div>
+            </div>
+            <div class="player-controls">
+                <button id="prev-song"><i class="bi bi-skip-start-fill"></i></button>
+                <button id="play-pause"><i class="bi bi-play-fill"></i></button>
+                <button id="next-song"><i class="bi bi-skip-end-fill"></i></button>
+                <button id="shuffle"><i class="bi bi-shuffle"></i></button>
+                <button id="loop"><i class="bi bi-repeat"></i></button>
+                <span id="current-time">0:00</span>
+                <input type="range" id="progress-bar" value="0" max="100">
+                <span id="total-duration">0:00</span>
+            </div>
+            <div class="volume-controls">
+                <input type="range" id="volume-control" value="50">
+            </div>
+            <div class="equalizer">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+            <button id="like-button" class="like-button">❤️</button> <!-- Pulsante per i preferiti -->
+            <button id="add-to-playlist-button" class="add-to-playlist-button" title="Aggiungi alla mia playlist"><i
+                    class="bi bi-plus-circle"></i></button>
+            <button id="lyrics-button" class="lyrics-button" title="Visualizza testi"><i
+                    class="bi bi-chat-quote"></i></button>
+            <button id="equalizer-button" class="equalizer-button" title="Equalizzatore Audio"><i
+                    class="bi bi-sliders"></i></button>
+        </div>
+
+        <!-- Pannello Equalizzatore -->
+        <div id="equalizer-panel" class="equalizer-panel">
+            <div class="eq-header">
+                <h3><i class="bi bi-sliders"></i> Equalizzatore Audio</h3>
+                <div class="eq-header-controls">
+                    <select class="preset-selector" id="preset-selector">
+                        <option value="normale">Normale</option>
+                        <option value="rock">Rock</option>
+                        <option value="pop">Pop</option>
+                        <option value="jazz">Jazz</option>
+                        <option value="classica">Classica</option>
+                        <option value="elettronica">Elettronica</option>
+                        <option value="bass-boost">Bass Boost</option>
+                        <option value="vocal">Vocal</option>
+                    </select>
+                    <button class="eq-close-btn" id="eq-close-btn">×</button>
+                </div>
+            </div>
+
+            <div class="eq-content">
+                <!-- Sliders delle frequenze -->
+                <div class="frequency-section">
+                    <h4>Frequenze</h4>
+                    <div class="frequency-sliders">
+                        <div class="freq-slider-group">
+                            <label>60Hz</label>
+                            <input type="range" class="freq-slider" data-frequency="60" min="-20" max="20" value="0"
+                                step="0.5">
+                            <span class="freq-value">0dB</span>
+                        </div>
+                        <div class="freq-slider-group">
+                            <label>170Hz</label>
+                            <input type="range" class="freq-slider" data-frequency="170" min="-20" max="20" value="0"
+                                step="0.5">
+                            <span class="freq-value">0dB</span>
+                        </div>
+                        <div class="freq-slider-group">
+                            <label>310Hz</label>
+                            <input type="range" class="freq-slider" data-frequency="310" min="-20" max="20" value="0"
+                                step="0.5">
+                            <span class="freq-value">0dB</span>
+                        </div>
+                        <div class="freq-slider-group">
+                            <label>600Hz</label>
+                            <input type="range" class="freq-slider" data-frequency="600" min="-20" max="20" value="0"
+                                step="0.5">
+                            <span class="freq-value">0dB</span>
+                        </div>
+                        <div class="freq-slider-group">
+                            <label>1kHz</label>
+                            <input type="range" class="freq-slider" data-frequency="1000" min="-20" max="20" value="0"
+                                step="0.5">
+                            <span class="freq-value">0dB</span>
+                        </div>
+                        <div class="freq-slider-group">
+                            <label>3kHz</label>
+                            <input type="range" class="freq-slider" data-frequency="3000" min="-20" max="20" value="0"
+                                step="0.5">
+                            <span class="freq-value">0dB</span>
+                        </div>
+                        <div class="freq-slider-group">
+                            <label>6kHz</label>
+                            <input type="range" class="freq-slider" data-frequency="6000" min="-20" max="20" value="0"
+                                step="0.5">
+                            <span class="freq-value">0dB</span>
+                        </div>
+                        <div class="freq-slider-group">
+                            <label>12kHz</label>
+                            <input type="range" class="freq-slider" data-frequency="12000" min="-20" max="20" value="0"
+                                step="0.5">
+                            <span class="freq-value">0dB</span>
+                        </div>
+                        <div class="freq-slider-group">
+                            <label>14kHz</label>
+                            <input type="range" class="freq-slider" data-frequency="14000" min="-20" max="20" value="0"
+                                step="0.5">
+                            <span class="freq-value">0dB</span>
+                        </div>
+                        <div class="freq-slider-group">
+                            <label>16kHz</label>
+                            <input type="range" class="freq-slider" data-frequency="16000" min="-20" max="20" value="0"
+                                step="0.5">
+                            <span class="freq-value">0dB</span>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Effetti Audio -->
-            <div class="effects-section">
-                <h4>Effetti Audio</h4>
-                <div class="effects-controls">
-                    <div class="effect-group">
-                        <div class="effect-toggle">
-                            <label class="switch">
-                                <input type="checkbox" id="reverb-toggle">
-                                <span class="slider round"></span>
-                            </label>
-                            <span>Reverb</span>
-                        </div>
-                        <div class="effect-controls" id="reverb-controls">
-                            <select id="reverb-type">
-                                <option value="room">Room</option>
-                                <option value="hall">Hall</option>
-                                <option value="cathedral">Cathedral</option>
-                                <option value="studio">Studio</option>
-                            </select>
-                            <div class="control-group">
-                                <label>Mix</label>
-                                <input type="range" id="reverb-mix" min="0" max="100" value="30" step="1">
-                                <span id="reverb-mix-value">30%</span>
+                <!-- Controlli Bass e Treble -->
+                <div class="bass-treble-section">
+                    <h4>Bass & Treble</h4>
+                    <div class="bass-treble-controls">
+                        <div class="bass-control">
+                            <label for="bass-knob">Bass</label>
+                            <div class="knob-container">
+                                <input type="range" id="bass-knob" class="knob" min="-20" max="20" value="0" step="1">
+                                <span class="knob-value" id="bass-value">0dB</span>
                             </div>
                         </div>
-                    </div>
-                    
-                    <div class="effect-group">
-                        <div class="effect-toggle">
-                            <label class="switch">
-                                <input type="checkbox" id="echo-toggle">
-                                <span class="slider round"></span>
-                            </label>
-                            <span>Echo</span>
-                        </div>
-                        <div class="effect-controls" id="echo-controls">
-                            <div class="control-group">
-                                <label>Delay</label>
-                                <input type="range" id="echo-delay" min="50" max="1000" value="250" step="10">
-                                <span id="echo-delay-value">250ms</span>
-                            </div>
-                            <div class="control-group">
-                                <label>Feedback</label>
-                                <input type="range" id="echo-feedback" min="0" max="70" value="25" step="1">
-                                <span id="echo-feedback-value">25%</span>
-                            </div>
-                            <div class="control-group">
-                                <label>Mix</label>
-                                <input type="range" id="echo-mix" min="0" max="50" value="20" step="1">
-                                <span id="echo-mix-value">20%</span>
+                        <div class="treble-control">
+                            <label for="treble-knob">Treble</label>
+                            <div class="knob-container">
+                                <input type="range" id="treble-knob" class="knob" min="-20" max="20" value="0" step="1">
+                                <span class="knob-value" id="treble-value">0dB</span>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Analizzatore di Spettro -->
-            <div class="spectrum-section">
-                <h4>Analizzatore di Spettro</h4>
-                <div class="spectrum-analyzer">
-                    <canvas id="spectrum-canvas" width="300" height="100"></canvas>
+                <!-- Effetti Audio -->
+                <div class="effects-section">
+                    <h4>Effetti Audio</h4>
+                    <div class="effects-controls">
+                        <div class="effect-group">
+                            <div class="effect-toggle">
+                                <label class="switch">
+                                    <input type="checkbox" id="reverb-toggle">
+                                    <span class="slider round"></span>
+                                </label>
+                                <span>Reverb</span>
+                            </div>
+                            <div class="effect-controls" id="reverb-controls">
+                                <select id="reverb-type">
+                                    <option value="room">Room</option>
+                                    <option value="hall">Hall</option>
+                                    <option value="cathedral">Cathedral</option>
+                                    <option value="studio">Studio</option>
+                                </select>
+                                <div class="control-group">
+                                    <label>Mix</label>
+                                    <input type="range" id="reverb-mix" min="0" max="100" value="30" step="1">
+                                    <span id="reverb-mix-value">30%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="effect-group">
+                            <div class="effect-toggle">
+                                <label class="switch">
+                                    <input type="checkbox" id="echo-toggle">
+                                    <span class="slider round"></span>
+                                </label>
+                                <span>Echo</span>
+                            </div>
+                            <div class="effect-controls" id="echo-controls">
+                                <div class="control-group">
+                                    <label>Delay</label>
+                                    <input type="range" id="echo-delay" min="50" max="1000" value="250" step="10">
+                                    <span id="echo-delay-value">250ms</span>
+                                </div>
+                                <div class="control-group">
+                                    <label>Feedback</label>
+                                    <input type="range" id="echo-feedback" min="0" max="70" value="25" step="1">
+                                    <span id="echo-feedback-value">25%</span>
+                                </div>
+                                <div class="control-group">
+                                    <label>Mix</label>
+                                    <input type="range" id="echo-mix" min="0" max="50" value="20" step="1">
+                                    <span id="echo-mix-value">20%</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Analizzatore di Spettro -->
+                <div class="spectrum-section">
+                    <h4>Analizzatore di Spettro</h4>
+                    <div class="spectrum-analyzer">
+                        <canvas id="spectrum-canvas" width="300" height="100"></canvas>
+                    </div>
                 </div>
             </div>
+
+            <div class="eq-actions">
+                <button class="eq-btn reset-btn" id="eq-reset-btn">Reset</button>
+                <button class="eq-btn save-preset-btn" id="save-preset-btn">Salva Preset</button>
+            </div>
         </div>
 
-        <div class="eq-actions">
-            <button class="eq-btn reset-btn" id="eq-reset-btn">Reset</button>
-            <button class="eq-btn save-preset-btn" id="save-preset-btn">Salva Preset</button>
+        <audio id="audio-player" src="" preload="none"></audio>
+
+        <div id="audio-loading"
+            style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:9999;background:rgba(0,0,0,0.7);padding:30px 50px;border-radius:20px;">
+            <div class="spinner-border text-light" role="status">
+                <span class="visually-hidden">Caricamento audio...</span>
+            </div>
         </div>
-    </div>
 
-    <audio id="audio-player" src="" preload="none"></audio>
+        <script src="scopri.js"></script>
+        <script>
+            // Hamburger Menu
+            const hamburgerMenu = document.querySelector('.hamburger-menu');
+            const nav = document.querySelector('.nav');
 
-    <div id="audio-loading"
-        style="display:none;position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:9999;background:rgba(0,0,0,0.7);padding:30px 50px;border-radius:20px;">
-        <div class="spinner-border text-light" role="status">
-            <span class="visually-hidden">Caricamento audio...</span>
-        </div>
-    </div>
-
-    <script src="scopri.js"></script>
-    <script>
-        // Hamburger Menu
-        const hamburgerMenu = document.querySelector('.hamburger-menu');
-        const nav = document.querySelector('.nav');
-
-        hamburgerMenu.addEventListener('click', () => {
-            nav.classList.toggle('nav--open');
-            hamburgerMenu.classList.toggle('is-active');
-            hamburgerMenu.setAttribute('aria-expanded',
-                hamburgerMenu.classList.contains('is-active')
-            );
-        });
-
-        // Chiudi il menu quando si clicca su un link
-        document.querySelectorAll('.nav a').forEach(link => {
-            link.addEventListener('click', () => {
-                nav.classList.remove('nav--open');
-                hamburgerMenu.classList.remove('is-active');
-                hamburgerMenu.setAttribute('aria-expanded', 'false');
+            hamburgerMenu.addEventListener('click', () => {
+                nav.classList.toggle('nav--open');
+                hamburgerMenu.classList.toggle('is-active');
+                hamburgerMenu.setAttribute('aria-expanded',
+                    hamburgerMenu.classList.contains('is-active')
+                );
             });
-        });
-    </script>
 
-    <!-- Modal di Accesso Richiesto -->
-    <div id="login-modal" class="modal-login-required" style="display: none;">
-        <div class="modal-login-content">
-            <div class="modal-login-header">
-                <h2>Accesso Richiesto</h2>
-                <button class="modal-login-close" id="close-login-modal">&times;</button>
-            </div>
-            <div class="modal-login-body">
-                <p>Per ascoltare la musica, devi prima eseguire l'accesso al tuo account.</p>
-            </div>
-            <div class="modal-login-footer">
-                <button class="modal-login-btn cancel" id="cancel-login-modal">Annulla</button>
-                <button class="modal-login-btn primary" id="go-to-login">Vai al Login</button>
+            // Chiudi il menu quando si clicca su un link
+            document.querySelectorAll('.nav a').forEach(link => {
+                link.addEventListener('click', () => {
+                    nav.classList.remove('nav--open');
+                    hamburgerMenu.classList.remove('is-active');
+                    hamburgerMenu.setAttribute('aria-expanded', 'false');
+                });
+            });
+        </script>
+
+        <!-- Modal di Accesso Richiesto -->
+        <div id="login-modal" class="modal-login-required" style="display: none;">
+            <div class="modal-login-content">
+                <div class="modal-login-header">
+                    <h2>Accesso Richiesto</h2>
+                    <button class="modal-login-close" id="close-login-modal">&times;</button>
+                </div>
+                <div class="modal-login-body">
+                    <p>Per ascoltare la musica, devi prima eseguire l'accesso al tuo account.</p>
+                </div>
+                <div class="modal-login-footer">
+                    <button class="modal-login-btn cancel" id="cancel-login-modal">Annulla</button>
+                    <button class="modal-login-btn primary" id="go-to-login">Vai al Login</button>
+                </div>
             </div>
         </div>
-    </div>
 
-    <script>
-        // ========== GESTIONE PROFILO UTENTE ==========
-        function initializeUserProfile() {
-            const userAvatar = document.getElementById('user-avatar');
-            const userMenuName = document.getElementById('user-menu-name');
-            const logoutBtn = document.getElementById('logout-btn');
-            const currentUserStr = localStorage.getItem('currentUser');
+        <script>
+            // ========== GESTIONE PROFILO UTENTE ==========
+            function initializeUserProfile() {
+                const userAvatar = document.getElementById('user-avatar');
+                const userMenuName = document.getElementById('user-menu-name');
+                const logoutBtn = document.getElementById('logout-btn');
+                const currentUserStr = localStorage.getItem('currentUser');
 
-            if (currentUserStr) {
-                try {
-                    const currentUser = JSON.parse(currentUserStr);
-                    const username = currentUser.nome || 'Utente';
-                    
-                    // Mostra l'iniziale nel cerchio
-                    const firstLetter = username.charAt(0).toUpperCase();
-                    userAvatar.textContent = firstLetter;
-                    
-                    // Mostra il nome nel dropdown
-                    userMenuName.textContent = username;
-                } catch (e) {
-                    console.error('Errore nel parsing dell\'utente:', e);
+                if (currentUserStr) {
+                    try {
+                        const currentUser = JSON.parse(currentUserStr);
+                        const username = currentUser.nome || 'Utente';
+
+                        // Mostra l'iniziale nel cerchio
+                        const firstLetter = username.charAt(0).toUpperCase();
+                        userAvatar.textContent = firstLetter;
+
+                        // Mostra il nome nel dropdown
+                        userMenuName.textContent = username;
+                    } catch (e) {
+                        console.error('Errore nel parsing dell\'utente:', e);
+                    }
                 }
+
+                // Logout
+                logoutBtn?.addEventListener('click', () => {
+                    localStorage.removeItem('currentUser');
+                    localStorage.removeItem('playerState');
+                    window.location.href = '../accesso_pagina/accedi/accedi.html';
+                });
             }
 
-            // Logout
-            logoutBtn?.addEventListener('click', () => {
-                localStorage.removeItem('currentUser');
-                localStorage.removeItem('playerState');
+            // Inizializza il profilo utente al caricamento
+            document.addEventListener('DOMContentLoaded', initializeUserProfile);
+        </script>
+
+        <script>
+            // Gestisci i click sui bottoni listen-now con controllo di autenticazione
+            document.addEventListener('click', (event) => {
+                if (event.target.classList.contains('listen-now')) {
+                    const loginModal = document.getElementById('login-modal');
+                    const currentUser = localStorage.getItem('currentUser');
+
+                    if (!currentUser) {
+                        // Mostra la modale di login
+                        event.preventDefault();
+                        event.stopPropagation();
+                        loginModal.style.display = 'flex';
+                    } else {
+                        // L'utente è loggato, consenti il comportamento normale
+                        return true;
+                    }
+                }
+            }, true); // Usa capture phase per intercettare prima il click
+
+            // Chiudi modale al clic su "Annulla"
+            document.getElementById('cancel-login-modal')?.addEventListener('click', () => {
+                document.getElementById('login-modal').style.display = 'none';
+            });
+
+            // Chiudi modale al clic sulla X
+            document.getElementById('close-login-modal')?.addEventListener('click', () => {
+                document.getElementById('login-modal').style.display = 'none';
+            });
+
+            // Reindirizza al login al clic su "Vai al Login"
+            document.getElementById('go-to-login')?.addEventListener('click', () => {
                 window.location.href = '../accesso_pagina/accedi/accedi.html';
             });
-        }
+        </script>
+    </body>
 
-        // Inizializza il profilo utente al caricamento
-        document.addEventListener('DOMContentLoaded', initializeUserProfile);
-    </script>
-
-    <script>
-        // Gestisci i click sui bottoni listen-now con controllo di autenticazione
-        document.addEventListener('click', (event) => {
-            if (event.target.classList.contains('listen-now')) {
-                const loginModal = document.getElementById('login-modal');
-                const currentUser = localStorage.getItem('currentUser');
-                
-                if (!currentUser) {
-                    // Mostra la modale di login
-                    event.preventDefault();
-                    event.stopPropagation();
-                    loginModal.style.display = 'flex';
-                } else {
-                    // L'utente è loggato, consenti il comportamento normale
-                    return true;
-                }
-            }
-        }, true); // Usa capture phase per intercettare prima il click
-
-        // Chiudi modale al clic su "Annulla"
-        document.getElementById('cancel-login-modal')?.addEventListener('click', () => {
-            document.getElementById('login-modal').style.display = 'none';
-        });
-
-        // Chiudi modale al clic sulla X
-        document.getElementById('close-login-modal')?.addEventListener('click', () => {
-            document.getElementById('login-modal').style.display = 'none';
-        });
-
-        // Reindirizza al login al clic su "Vai al Login"
-        document.getElementById('go-to-login')?.addEventListener('click', () => {
-            window.location.href = '../accesso_pagina/accedi/accedi.html';
-        });
-    </script>
-</body>
-
-</html>
+    </html>
