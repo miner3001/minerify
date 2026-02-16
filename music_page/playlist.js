@@ -41,9 +41,6 @@ let likedSongs   = JSON.parse(localStorage.getItem('likedSongs'))  || [];
 // Tutte le canzoni disponibili (scritte da scopri.js)
 let ALL_AVAILABLE_SONGS = JSON.parse(localStorage.getItem('allSongsDataStore')) || [];
 
-// Throttle per savePlayerState
-let _saveStateTimer = null;
-
 // ============================================================
 // === UTILITY ================================================
 // ============================================================
@@ -98,57 +95,25 @@ function reloadAvailableSongs() {
  * così i due si leggono reciprocamente senza corruzione.
  */
 function savePlayerState() {
-    clearTimeout(_saveStateTimer);
-    _saveStateTimer = setTimeout(() => {
-        const ap           = document.getElementById('audio-player');
-        const currentSongEl = document.getElementById('current-song');
-        const albumCoverEl  = document.getElementById('current-album-cover');
-        if (!ap) return;
+    const ap           = document.getElementById('audio-player');
+    const currentSongEl = document.getElementById('current-song');
+    const albumCoverEl  = document.getElementById('current-album-cover');
+    if (!ap) return;
 
-        // Trova i dati canzone corrente per ricostruire il contesto album
-        const normalizedSrc = normalizeAudioSrc(ap.src);
-        const songData = ALL_AVAILABLE_SONGS.find(s => normalizeAudioSrc(s.src) === normalizedSrc)
-                      || currentPlaylist[currentSongIndex]
-                      || null;
-
-        // Ricostruisce currentAlbumSongs/Names come li usa scopri.js
-        let currentAlbumSongs    = [];
-        let currentAlbumNames    = [];
-        let currentAlbumCoverSrc = '';
-
-        if (songData) {
-            // Prendi tutte le canzoni dello stesso album
-            const albumSongs = ALL_AVAILABLE_SONGS.filter(s => s.albumName === songData.albumName && s.cover === songData.cover);
-            currentAlbumSongs    = albumSongs.map(s => s.src);
-            currentAlbumNames    = albumSongs.map(s => s.name);
-            currentAlbumCoverSrc = songData.cover || '';
-        }
-
-        const state = {
-            // Campi comuni
-            src:          ap.src,
-            currentTime:  ap.currentTime,
-            isPlaying,
-            songName:     currentSongEl?.textContent || '',
-            albumCover:   albumCoverEl?.src  || '',
-            volume:       ap.volume,
-            isShuffle,
-            isLoop,
-            currentArtist: songData?.artist || '',
-            // Campi per scopri.js
-            currentAlbumSongs,
-            currentAlbumNames,
-            currentAlbumCoverSrc,
-            currentSongIndex: currentAlbumSongs.indexOf(normalizedSrc !== '' ? ap.src : '') !== -1
-                ? currentAlbumSongs.indexOf(ap.src)
-                : currentSongIndex,
-            // Campi per playlist.js
-            currentPlaylist,
-            currentPlaylistIndex: currentSongIndex
-        };
-        localStorage.setItem('playerState', JSON.stringify(state));
-        logEvent('INFO', 'Stato salvato');
-    }, 1000);
+    const state = {
+        src:          ap.src,
+        currentTime:  ap.currentTime,
+        isPlaying,
+        songName:     currentSongEl?.textContent || '',
+        albumCover:   albumCoverEl?.src  || '',
+        volume:       ap.volume,
+        isShuffle,
+        isLoop,
+        currentPlaylist,
+        currentPlaylistIndex: currentSongIndex
+    };
+    localStorage.setItem('playerState', JSON.stringify(state));
+    logEvent('INFO', 'Stato salvato', { song: currentSongEl?.textContent });
 }
 
 /**
@@ -163,7 +128,6 @@ function restorePlayerState() {
         const playPauseBtn = document.getElementById('play-pause');
         const currentSongEl = document.getElementById('current-song');
         const albumCoverEl  = document.getElementById('current-album-cover');
-        const artistEl      = document.getElementById('current-artist');
         const volControl    = document.getElementById('volume-control');
 
         ap.src         = saved.src;
@@ -172,50 +136,36 @@ function restorePlayerState() {
         if (volControl) volControl.value = (saved.volume != null ? saved.volume : 1) * 100;
 
         currentSongEl.textContent = saved.songName || 'Nessuna canzone in riproduzione';
-        if (artistEl)    artistEl.textContent = saved.currentArtist || '';
-        if (albumCoverEl) albumCoverEl.src    = saved.albumCover || '';
+        if (albumCoverEl) albumCoverEl.src = saved.albumCover || '';
 
-        // Ripristina currentPlaylist:
-        // Priorità: currentPlaylist (da playlist.js), oppure ricostruisce dall'album (da scopri.js)
+        // Ripristina currentPlaylist
         if (saved.currentPlaylist?.length) {
-            currentPlaylist  = saved.currentPlaylist;
-            currentSongIndex = saved.currentPlaylistIndex || saved.currentSongIndex || 0;
-        } else if (saved.currentAlbumSongs?.length) {
-            // Converte il formato scopri in formato playlist
-            currentPlaylist = saved.currentAlbumSongs.map((src, i) => {
-                const found = ALL_AVAILABLE_SONGS.find(s => s.src === src.trim());
-                return found || {
-                    src: src.trim(),
-                    name: saved.currentAlbumNames?.[i] || '',
-                    artist: saved.currentArtist || '',
-                    cover: saved.currentAlbumCoverSrc || ''
-                };
-            });
-            currentSongIndex = saved.currentSongIndex || 0;
+            currentPlaylist = saved.currentPlaylist;
+            currentSongIndex = saved.currentPlaylistIndex || 0;
         }
 
         isShuffle = saved.isShuffle || false;
-        isLoop    = saved.isLoop    || false;
+        isLoop = saved.isLoop || false;
+
+        logEvent('INFO', 'Stato ripristinato', { song: saved.songName });
 
         updateShuffleLoopButtons();
         updateLikeButton();
         updatePlaylistButton();
         highlightCurrentSongInList();
 
-        if (saved.isPlaying) {
+        if (saved.isPlaying && ap.src) {
             ap.play()
                 .then(() => {
                     isPlaying = true;
                     playPauseBtn.innerHTML = '<i class="bi bi-pause-fill"></i>';
-                    logEvent('SUCCESS', 'Stato ripristinato — in riproduzione');
+                    logEvent('SUCCESS', 'Riproduzione ripristinata');
                 })
                 .catch(() => {
                     isPlaying = false;
                     playPauseBtn.innerHTML = '<i class="bi bi-play-fill"></i>';
-                    logEvent('INFO', 'Autoplay bloccato dal browser — in pausa');
+                    logEvent('INFO', 'Autoplay bloccato dal browser');
                 });
-        } else {
-            logEvent('INFO', 'Stato ripristinato — in pausa');
         }
     } catch (err) {
         logEvent('ERROR', 'Errore ripristino stato', err);

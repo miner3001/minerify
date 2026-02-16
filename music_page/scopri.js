@@ -63,10 +63,11 @@ function displayLogOnScreen(message, eventType) {
 let isPlaying = false;
 let isShuffle = false;
 let isLoop = false;
-let currentSongIndex = 0;         // Indice della canzone NELL'ALBUM corrente
+let currentSongIndex = 0;
 let currentAlbumSongs = [];
 let currentAlbumNames = [];
 let currentAlbumCoverSrc = '';
+let currentArtist = '';
 let likedSongs = JSON.parse(localStorage.getItem('likedSongs')) || [];
 let allSongsData = [];             // Unica fonte di verità per tutte le canzoni
 let shuffleHistory = [];
@@ -163,70 +164,65 @@ document.addEventListener('DOMContentLoaded', async function () {
         likeButton.textContent = isLiked ? '❤️' : '🤍';
     }
 
-    // --- Stato player ---
-    // FIX #8: throttle su savePlayerState (max 1 volta/sec)
-    let saveStateTimeout = null;
     function savePlayerState() {
-        clearTimeout(saveStateTimeout);
-        saveStateTimeout = setTimeout(() => {
-            const playerState = {
-                src: audioPlayer.src,
-                currentTime: audioPlayer.currentTime,
-                isPlaying,
-                songName: currentSongEl.textContent,
-                albumCover: currentAlbumCover.src,
-                currentAlbumSongs,
-                currentAlbumNames,
-                currentAlbumCoverSrc,
-                currentSongIndex,
-                volume: audioPlayer.volume,
-                isShuffle,
-                isLoop
-            };
-            localStorage.setItem('playerState', JSON.stringify(playerState));
-        }, 1000);
+        const playerState = {
+            src: audioPlayer.src,
+            currentTime: audioPlayer.currentTime,
+            isPlaying: isPlaying,
+            songName: currentSongEl.textContent,
+            albumCover: currentAlbumCover.src,
+            currentArtist: currentArtist,
+            currentAlbumSongs: currentAlbumSongs,
+            currentAlbumNames: currentAlbumNames,
+            currentAlbumCoverSrc: currentAlbumCoverSrc,
+            currentSongIndex: currentSongIndex,
+            volume: audioPlayer.volume,
+            isShuffle: isShuffle,
+            isLoop: isLoop
+        };
+        localStorage.setItem('playerState', JSON.stringify(playerState));
+        logEvent('INFO', 'Stato salvato', { song: currentSongEl.textContent });
     }
 
     function restorePlayerState() {
         try {
             const savedState = JSON.parse(localStorage.getItem('playerState'));
             if (!savedState) return;
-            audioPlayer.src         = savedState.src || '';
+            
+            audioPlayer.src = savedState.src || '';
             audioPlayer.currentTime = savedState.currentTime || 0;
-            audioPlayer.volume      = savedState.volume || 1;
+            audioPlayer.volume = savedState.volume || 1;
             currentSongEl.textContent = savedState.songName || 'Nessuna canzone in riproduzione';
-            currentAlbumCover.src   = savedState.albumCover || '';
-            currentAlbumSongs       = savedState.currentAlbumSongs || [];
-            currentAlbumNames       = savedState.currentAlbumNames || [];
-            currentAlbumCoverSrc    = savedState.currentAlbumCoverSrc || '';
-            currentSongIndex        = savedState.currentSongIndex || 0;
-            isShuffle               = savedState.isShuffle || false;
-            isLoop                  = savedState.isLoop || false;
+            currentAlbumCover.src = savedState.albumCover || '';
+            currentArtist = savedState.currentArtist || '';
+            currentAlbumSongs = savedState.currentAlbumSongs || [];
+            currentAlbumNames = savedState.currentAlbumNames || [];
+            currentAlbumCoverSrc = savedState.currentAlbumCoverSrc || '';
+            currentSongIndex = savedState.currentSongIndex || 0;
+            isShuffle = savedState.isShuffle || false;
+            isLoop = savedState.isLoop || false;
 
-            if (savedState.isPlaying) {
+            logEvent('INFO', 'Stato ripristinato', { song: savedState.songName });
+
+            if (savedState.isPlaying && audioPlayer.src) {
                 audioPlayer.play()
                     .then(() => {
                         isPlaying = true;
                         playPauseButton.innerHTML = '<i class="bi bi-pause-fill"></i>';
-                        if (savedState.src && savedState.songName) {
-                            updateMediaSessionMetadata({ name: savedState.songName, artist: 'Artista', albumName: 'Album', cover: savedState.albumCover, src: savedState.src });
-                            updateMediaSessionPlaybackState('playing');
-                        }
+                        logEvent('SUCCESS', 'Riproduzione ripristinata');
                     })
                     .catch(() => {
                         isPlaying = false;
                         playPauseButton.innerHTML = '<i class="bi bi-play-fill"></i>';
-                        updateMediaSessionPlaybackState('paused');
+                        logEvent('INFO', 'Autoplay bloccato dal browser');
                     });
-            } else if (savedState.src && savedState.songName) {
-                updateMediaSessionMetadata({ name: savedState.songName, artist: 'Artista', albumName: 'Album', cover: savedState.albumCover, src: savedState.src });
-                updateMediaSessionPlaybackState('paused');
             }
+            
             updateLikeButton();
             updatePlaylistButton();
             updateShuffleLoopButtons();
         } catch (error) {
-            console.error('Errore nel ripristino dello stato:', error);
+            logEvent('ERROR', 'Errore ripristino stato', error);
         }
     }
 
@@ -250,6 +246,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         setCurrentAlbumContextFromSong(songData);
         audioPlayer.src = songData.src;
         currentSongEl.textContent = songData.name;
+        currentArtist = songData.artist || '';
         const artistEl = document.getElementById('current-artist');
         if (artistEl) artistEl.textContent = songData.artist;
         currentAlbumCover.src = songData.cover;
