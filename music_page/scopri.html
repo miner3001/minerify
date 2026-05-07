@@ -569,6 +569,19 @@
                 window.location.href = '../accesso_pagina/accedi/accedi.html';
             });
         </script>
+
+        <!-- Modale di benvenuto -->
+        <div id="welcome-modal" class="welcome-modal-overlay">
+            <div class="welcome-modal-content">
+                <h2>Ben ritornato!</h2>
+                <p id="welcome-user-name">Benvenuto su Minerify</p>
+                <p class="welcome-subtitle">Pronto a scoprire nuova musica?</p>
+                <button class="welcome-btn" onclick="document.getElementById('welcome-modal').style.display = 'none'">
+                    Inizia
+                </button>
+            </div>
+        </div>
+
     </body>
 
     </html>

@@ -1,3 +1,33 @@
+// Controlla se l'utente è già loggato
+document.addEventListener('DOMContentLoaded', function() {
+    const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+    const loginContainer = document.querySelector('.login-container');
+    const alreadyLoggedModal = document.getElementById('alreadyLoggedModal');
+    const userInfo = document.getElementById('userInfo');
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    if (currentUser) {
+        // Utente già loggato - nascondi il form e mostra la modale
+        loginContainer.style.display = 'none';
+        alreadyLoggedModal.style.display = 'flex';
+        
+        // Mostra le informazioni dell'utente
+        userInfo.innerHTML = `
+            <p><strong>Email:</strong> ${currentUser['email '] || currentUser.email || 'N/A'}</p>
+        `;
+
+        // Funzione logout
+        logoutBtn.addEventListener('click', function() {
+            localStorage.removeItem('currentUser');
+            window.location.reload();
+        });
+    } else {
+        // Nessun utente loggato - mostra il form normalmente
+        alreadyLoggedModal.style.display = 'none';
+        loginContainer.style.display = 'block';
+    }
+});
+
 document.getElementById('loginForm').addEventListener('submit', async function(event) {
     event.preventDefault();
     
@@ -22,6 +52,8 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
         if (user) {
             // Salva i dati dell'utente in localStorage
             localStorage.setItem('currentUser', JSON.stringify(user));
+            // Flag per mostrare modale "Ben ritornato" solo la prima volta
+            sessionStorage.setItem('firstLoginAfterAccess', 'true');
             window.location.href = '../../music_page/scopri.html';
         } else {
             alert('Credenziali non valide. Email o password errata.');

@@ -42,6 +42,23 @@
     </p>
 </div>
 
+<!-- Modale per utente già loggato -->
+<div id="alreadyLoggedModal" class="modal-overlay">
+    <div class="modal-content">
+        <h2>Benvenuto, sei già loggato</h2>
+        <p>L'account su cui hai fatto l'accesso è</p>
+        <div class="user-info" id="userInfo"></div>
+        <div class="modal-buttons">
+            <button class="modal-btn primary" onclick="window.location.href='../../music_page/scopri.html'">
+                Ascolta della musica
+            </button>
+            <button class="modal-btn secondary" id="logoutBtn">
+                Esci
+            </button>
+        </div>
+    </div>
+</div>
+
 <footer class="footer">
     <p>Non hai un account? <a href="../registrati/registrati.html" class="link">Registrati</a></p>
 </footer>

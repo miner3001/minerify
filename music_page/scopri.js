@@ -126,6 +126,21 @@ function initializeAllSongsData() {
 document.addEventListener('DOMContentLoaded', async function () {
     logEvent('INFO', '=== MINERIFY MUSIC PLAYER AVVIATO ===');
 
+    // Modale di benvenuto solo al primo caricamento dopo il login
+    const firstLoginFlag = sessionStorage.getItem('firstLoginAfterAccess');
+    if (firstLoginFlag) {
+        const welcomeModal = document.getElementById('welcome-modal');
+        const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+        const welcomeUserName = document.getElementById('welcome-user-name');
+        
+        if (currentUser && currentUser.nome) {
+            welcomeUserName.textContent = `Bentornato, ${currentUser.nome}!`;
+        }
+        
+        welcomeModal.style.display = 'flex';
+        sessionStorage.removeItem('firstLoginAfterAccess'); // Rimuove il flag dopo aver mostrato la modale
+    }
+
     // FIX #2: carica le durate PRIMA di inizializzare allSongsData
     await loadTrackDurations();
 
@@ -153,6 +168,12 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     initializeAllSongsData();
     initializeMediaSession();
+
+    // Imposta immagine di default quando nessuna canzone è in riproduzione
+    const DEFAULT_COVER = '../img/spotifyLogo.jpg'; // Cambia questo URL con la tua immagine
+    if (currentAlbumCover) {
+        currentAlbumCover.src = DEFAULT_COVER;
+    }
 
     // --- Preferiti ---
     function saveFavorites() {
