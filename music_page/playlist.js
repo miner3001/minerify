@@ -796,6 +796,41 @@ document.addEventListener('DOMContentLoaded', () => {
         showToast('Visita "Scopri" per caricare le canzoni disponibili.', 'warning');
     }
 
+    // -- LOGICA ACCOUNT UTENTE --
+    const currentUserJSON = localStorage.getItem('currentUser');
+    let currentUser = null;
+    try {
+        if (currentUserJSON) currentUser = JSON.parse(currentUserJSON);
+    } catch(e){}
+
+    const userAvatar = document.getElementById('user-avatar');
+    const userMenuName = document.getElementById('user-menu-name');
+    const logoutBtn = document.getElementById('logout-btn');
+
+    if (currentUser && currentUser.nome) {
+        if (userMenuName) userMenuName.textContent = currentUser.nome;
+        if (userAvatar) userAvatar.textContent = currentUser.nome.charAt(0).toUpperCase();
+    } else {
+        if (userMenuName) userMenuName.textContent = "Ospite";
+        if (userAvatar) userAvatar.textContent = "?";
+        alert("Devi accedere per visualizzare la libreria.");
+        window.location.href = "../accesso_pagina/accedi/accedi.html";
+        return;
+    }
+
+    // Renderizza ascoltati di recente nel menu
+    renderRecentlyPlayed();
+
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', () => {
+            localStorage.removeItem('currentUser');
+            window.location.href = "../accesso_pagina/accedi/accedi.html";
+        });
+    }
+
+    // Renderizza ascoltati di recente nel menu
+    renderRecentlyPlayed();
+
     initPlayerBar();
     renderLikedSongs();
     renderMyPlaylist();
@@ -829,5 +864,53 @@ document.addEventListener('DOMContentLoaded', () => {
     updatePlaylistButton();
     updateShuffleLoopButtons();
 
-    logEvent('SUCCESS', `Playlist inizializzata — ${myPlaylist.length} brani, ${likedSongs.length} preferiti`);
+    logEvent('SUCCESS', `Playlist inizializzata – ${myPlaylist.length} brani, ${likedSongs.length} preferiti`);
 });
+
+// ================================================================
+// === FUNZIONI PER ASCOLTATI DI RECENTE (LIBRERIA) ===
+// ================================================================
+
+function getRecentlyPlayed() {
+    try {
+        const data = localStorage.getItem('minerifyRecent');
+        return data ? JSON.parse(data) : [];
+    } catch (e) {
+        return [];
+    }
+}
+
+function renderRecentlyPlayed() {
+    const strip = document.getElementById('user-menu-recents-list');
+    if (!strip) return;
+
+    const recent = getRecentlyPlayed();
+    strip.innerHTML = '';
+
+    if (recent.length === 0) {
+        strip.innerHTML = '<p style="color: rgba(255,255,255,0.5); font-style: italic; font-size: 0.8em; margin: 0;">Nessun ascolto recente.</p>';
+        return;
+    }
+
+    recent.forEach(item => {
+        const rawName  = item.name || '';
+        const title    = rawName.includes(' - ') ? rawName.split(' - ')[0].trim() : rawName;
+
+        const el = document.createElement('div');
+        el.className = 'recent-item-menu';
+        el.title = item.name || '';
+        el.innerHTML = `
+            <img src="${item.cover || '../images/placeholder-album.png'}" alt="Cover" class="recent-item-menu-cover" onerror="this.src='../images/placeholder-album.png'">
+            <div class="recent-item-menu-info">
+                <p class="recent-item-menu-title">${title}</p>
+                <p class="recent-item-menu-artist">${item.artist || 'Sconosciuto'}</p>
+            </div>
+            <i class="bi bi-play-fill recent-item-menu-play"></i>
+        `;
+        el.addEventListener('click', () => {
+            const songData = ALL_AVAILABLE_SONGS.find(s => normalizeAudioSrc(s.src) === normalizeAudioSrc(item.src));
+            if (songData) playSong(songData, null); 
+        });
+        strip.appendChild(el);
+    });
+}

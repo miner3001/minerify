@@ -1,0 +1,60 @@
+﻿<!-- ===== MODALE FULLSCREEN NOW PLAYING ===== -->
+    <div id="nowplaying-modal" class="nowplaying-modal">
+        <div class="nowplaying-bg" id="nowplaying-bg"></div>
+        <div class="nowplaying-inner">
+            <!-- Colonna sinistra: copertina + info + controlli -->
+            <div class="nowplaying-left">
+                <button class="nowplaying-close" id="nowplaying-close" title="Chiudi (ESC)"><i class="bi bi-x-lg"></i></button>
+                <div class="nowplaying-cover-wrap">
+                    <img id="nowplaying-cover" src="" alt="Album Cover" class="nowplaying-cover">
+                    <div class="nowplaying-cover-glow" id="nowplaying-cover-glow"></div>
+                </div>
+                <div class="nowplaying-info">
+                    <h2 class="nowplaying-title" id="nowplaying-title">Nessuna canzone</h2>
+                    <p class="nowplaying-artist" id="nowplaying-artist-name" title="Vedi artista">&mdash;</p>
+                    <p class="nowplaying-album" id="nowplaying-album-name">&mdash;</p>
+                </div>
+                <!-- Progress -->
+                <div class="nowplaying-progress-wrap">
+                    <span class="np-time" id="np-current-time">0:00</span>
+                    <input type="range" id="np-progress-bar" class="np-progress-bar" value="0" max="100">
+                    <span class="np-time" id="np-total-duration">0:00</span>
+                </div>
+                <!-- Controlli -->
+                <div class="nowplaying-controls">
+                    <button id="np-prev" class="np-btn" title="Precedente"><i class="bi bi-skip-start-fill"></i></button>
+                    <button id="np-play-pause" class="np-btn np-play" title="Play/Pausa"><i class="bi bi-play-fill"></i></button>
+                    <button id="np-next" class="np-btn" title="Successivo"><i class="bi bi-skip-end-fill"></i></button>
+                    <button id="np-like" class="np-btn np-like-btn" title="Mi piace">ðŸ¤</button>
+                </div>
+                <!-- Visualizzatore audio -->
+                <canvas id="nowplaying-visualizer" class="nowplaying-visualizer"></canvas>
+            </div>
+            <!-- Colonna destra: testi -->
+            <div class="nowplaying-right">
+                <div class="nowplaying-lyrics-header">
+                    <div class="np-lyrics-title-wrap">
+                        <i class="bi bi-music-note-list"></i>
+                        <span id="np-lyrics-title">Testi</span>
+                    </div>
+                    <!-- Controlli sincronizzazione manuale -->
+                    <div class="np-sync-controls" title="Regola sincronizzazione testi">
+                        <button id="np-sync-minus" class="np-sync-btn" title="Testi in anticipo (-0.5s)"><i class="bi bi-chevron-left"></i></button>
+                        <span id="np-sync-offset-label" class="np-sync-label">+0.0s</span>
+                        <button id="np-sync-plus" class="np-sync-btn" title="Testi in ritardo (+0.5s)"><i class="bi bi-chevron-right"></i></button>
+                        <button id="np-sync-reset" class="np-sync-btn np-sync-reset" title="Reset sync"><i class="bi bi-arrow-counterclockwise"></i></button>
+                    </div>
+                </div>
+                <div class="nowplaying-lyrics-body" id="np-lyrics-body">
+                    <div class="np-lyrics-loading" id="np-lyrics-loading">
+                        <div class="np-spinner"></div>
+                        <p>Caricamento testi...</p>
+                    </div>
+                    <div class="np-lyrics-content" id="np-lyrics-content"></div>
+                    <div class="np-lyrics-notfound" id="np-lyrics-notfound" style="display:none">
+                        <i class="bi bi-music-note-beamed"></i>
+                        <p>Testi non disponibili per questa canzone</p>
+                        <small>Controlla la connessione internet</small>
+                    </div>
+                </div>
+            </div>
