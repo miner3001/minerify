@@ -60,11 +60,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
     fsBtn?.addEventListener('click', openNowPlayingModal);
     closeBtn?.addEventListener('click', closeNowPlayingModal);
+    
+    npArtist?.addEventListener('click', () => {
+        if (typeof window.openArtistPanel === 'function') {
+            closeNowPlayingModal();
+            setTimeout(() => {
+                const songData = getCurrentSongData();
+                if (songData && songData.artist) {
+                    window.openArtistPanel(songData.artist);
+                }
+            }, 300); // Aspetta che il modal si chiuda
+        }
+    });
 
     function getCurrentSongData() {
         if (!ap || !ap.src) return null;
-        const norm = normalizeAudioSrc(ap.src);
-        return ALL_AVAILABLE_SONGS.find(s => normalizeAudioSrc(s.src) === norm) || null;
+        
+        // Usa la funzione globale se esiste, altrimenti un fallback compatibile
+        const normalizeSrc = typeof window.normalizeAudioSrc === 'function' ? window.normalizeAudioSrc : (src) => {
+            if (!src) return '';
+            if (src.includes('/music/')) return src.substring(src.lastIndexOf('/music/') + 1);
+            return src;
+        };
+        
+        const norm = normalizeSrc(ap.src);
+        const allSongs = window.ALL_AVAILABLE_SONGS || (typeof ALL_AVAILABLE_SONGS !== 'undefined' ? ALL_AVAILABLE_SONGS : []);
+        return allSongs.find(s => normalizeSrc(s.src) === norm) || null;
     }
 
     function updateNowPlayingUI() {
@@ -135,17 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ap.currentTime = (e.target.value / 100) * ap.duration;
     });
 
-    // Cambia canzone => aggiorna UI
-    const originalPlaySong = window.playSong;
-    if (originalPlaySong) {
-        window.playSong = function(songData, playlist) {
-            originalPlaySong(songData, playlist);
-            if (modal.classList.contains('open')) {
-                updateNowPlayingUI();
-                loadNpLyrics();
-            }
-        };
-    }
+
 
     // --- TESTI ---
     async function loadNpLyrics() {
@@ -219,6 +230,10 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // Esposizione globale per essere richiamati indipendentemente dall'ordine di caricamento
+    window.updateNowPlayingUI = updateNowPlayingUI;
+    window.loadNpLyrics = loadNpLyrics;
 
     function updateSyncLabel() {
         const lbl = document.getElementById('np-sync-offset-label');

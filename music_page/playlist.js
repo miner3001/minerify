@@ -208,6 +208,14 @@ function playSong(song, index) {
         updatePlaylistButton();
         highlightCurrentSongInList();
         savePlayerState();
+
+        // Se il modal full screen è aperto, aggiornalo
+        const modal = document.getElementById('nowplaying-modal');
+        if (modal && modal.classList.contains('open')) {
+            if (window.updateNowPlayingUI) window.updateNowPlayingUI();
+            if (window.loadNpLyrics) window.loadNpLyrics();
+        }
+
         logEvent('SUCCESS', `Avviato: ${song.name}`);
     }).catch(err => {
         isPlaying = false;

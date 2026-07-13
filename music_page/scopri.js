@@ -336,6 +336,13 @@ document.addEventListener('DOMContentLoaded', async function () {
             // Nuove UI feature
             updateNowPlayingAlbumCard(songData);
             addToRecentlyPlayed(songData);
+
+            // Se il modal full screen è aperto, aggiornalo
+            const modal = document.getElementById('nowplaying-modal');
+            if (modal && modal.classList.contains('open')) {
+                if (window.updateNowPlayingUI) window.updateNowPlayingUI();
+                if (window.loadNpLyrics) window.loadNpLyrics();
+            }
         }).catch(error => {
             isPlaying = false;
             playPauseButton.innerHTML = '<i class="bi bi-play-fill"></i>';
