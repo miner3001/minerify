@@ -2007,4 +2007,14 @@ document.addEventListener('DOMContentLoaded', () => {
             muteBtn.innerHTML = '<i class="bi bi-volume-up-fill"></i>';
         }
     }
+
+    // Aggiungi listener per il bottone fullscreen e la chiusura della modale Now Playing
+    const fsBtn = document.getElementById('fullscreen-btn');
+    const npCloseBtn = document.getElementById('nowplaying-close');
+    if (fsBtn) {
+        fsBtn.addEventListener('click', openNowPlayingModal);
+    }
+    if (npCloseBtn) {
+        npCloseBtn.addEventListener('click', closeNowPlayingModal);
+    }
 });

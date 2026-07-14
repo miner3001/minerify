@@ -37,24 +37,58 @@
                 </div>
             </div>
         </div>
-        <nav class="nav">
-            <a href="../index.html"><i class="bi bi-house-door"></i> Home</a>
-            <a href="../music_page/scopri.html"><i class="bi bi-compass"></i> Scopri</a>
-            <a href="../music_page/playlist.html"><i class="bi bi-collection-play"></i> La tua libreria</a>
-            <a href="../pagamento/premium.html"><i class="bi bi-gem"></i> Premium</a>
-        </nav>
+        <button class="hamburger-menu" aria-label="Menu" aria-expanded="false">
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+            <span class="hamburger-line"></span>
+        </button>
     </header>
+
+    <nav class="nav">
+        <a href="../index.html"><i class="bi bi-house-door"></i> Home</a>
+        <a href="../music_page/scopri.html"><i class="bi bi-compass"></i> Scopri</a>
+        <a href="../music_page/playlist.html" class="active"><i class="bi bi-collection-play"></i> La tua libreria</a>
+        <a href="../pagamento/premium.html"><i class="bi bi-gem"></i> Premium</a>
+    </nav>
 
     <main class="main-content">
 
         <!-- Sezione playlist principale -->
         <div class="playlist-main-section">
-            <div class="playlist-feature-container">
+            <div class="playlist-sidebar">
+                <div class="sidebar-header">
+                    <h3>Le tue Playlists</h3>
+                    <button id="create-new-playlist-btn" title="Nuova Playlist"><i class="bi bi-plus-lg"></i></button>
+                </div>
+                <ul class="playlist-nav" id="playlist-nav-list">
+                    <li class="active" data-playlist="main">La tua playlist</li>
+                    <li data-playlist="favorites"><i class="bi bi-heart-fill" style="color: #1db954;"></i> Brani preferiti</li>
+                    <!-- Custom playlists go here -->
+                </ul>
+            </div>
 
-                <!-- La tua playlist -->
-                <section class="user-playlist-section">
+            <div class="playlist-feature-container">
+                <!-- Toolbar Ordinamento & Ricerca locale -->
+                <div class="playlist-toolbar">
+                    <div class="toolbar-search">
+                        <i class="bi bi-search"></i>
+                        <input type="text" id="local-search-input" placeholder="Cerca nella playlist...">
+                    </div>
+                    <div class="toolbar-sort">
+                        <label for="sort-select">Ordina per:</label>
+                        <select id="sort-select">
+                            <option value="default">Default</option>
+                            <option value="title">Titolo (A-Z)</option>
+                            <option value="artist">Artista (A-Z)</option>
+                            <option value="recent">Aggiunti di recente</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Lista Playlist (Dinamica) -->
+                <section class="user-playlist-section active-section" id="dynamic-playlist-section">
                     <div class="playlist-header">
-                        <h2>La tua playlist</h2>
+                        <h2 id="current-playlist-title">La tua playlist</h2>
                         <div class="playlist-header-btns">
                             <button id="play-playlist-btn" class="play-playlist-btn" title="Riproduci tutta la playlist">
                                 <i class="bi bi-play-circle-fill"></i> Play
@@ -62,22 +96,35 @@
                             <button id="open-overlay-btn" class="add-main-btn" title="Aggiungi canzoni">
                                 <i class="bi bi-plus-circle"></i>
                             </button>
+                            <!-- Delete playlist button (hidden for main/favorites) -->
+                            <button id="delete-playlist-btn" class="delete-playlist-btn" title="Elimina Playlist" style="display: none;">
+                                <i class="bi bi-trash"></i>
+                            </button>
                         </div>
                     </div>
-                    <ul id="user-playlist-list" class="song-list"></ul>
-                </section>
-
-                <!-- Brani preferiti -->
-                <section class="favorites-section">
-                    <div class="playlist-header">
-                        <h2>Brani preferiti</h2>
-                    </div>
-                    <ul id="favorite-songs-list" class="song-list"></ul>
+                    <ul id="dynamic-song-list" class="song-list sortable-list"></ul>
                 </section>
 
             </div>
         </div>
     </main>
+
+    <!-- Modale Crea Nuova Playlist -->
+    <div id="create-playlist-modal" class="modal-login-required" style="display:none;">
+        <div class="modal-login-content">
+            <div class="modal-login-header">
+                <h2>Crea Nuova Playlist</h2>
+                <button class="modal-login-close" id="close-create-playlist-modal">&times;</button>
+            </div>
+            <div class="modal-login-body">
+                <input type="text" id="new-playlist-name" placeholder="Nome della playlist" class="new-playlist-input">
+            </div>
+            <div class="modal-login-footer">
+                <button class="modal-login-btn cancel" id="cancel-create-playlist-modal">Annulla</button>
+                <button class="modal-login-btn primary" id="confirm-create-playlist-btn">Crea</button>
+            </div>
+        </div>
+    </div>
 
     <!-- Overlay aggiungi canzoni -->
     <div id="add-songs-overlay" class="add-songs-overlay">
@@ -132,10 +179,10 @@
                 <input type="range" id="volume-control" value="50" min="0" max="100">
             </div>
             <div class="player-actions">
-                <button id="like-button"            class="action-btn" title="Mi piace">ðŸ¤</button>
+                <button id="like-button"            class="action-btn" title="Mi piace">❤️</button>
                 <button id="add-to-playlist-button" class="action-btn" title="Aggiungi alla playlist"><i class="bi bi-plus-circle"></i></button>
                 <button id="equalizer-button"       class="action-btn" title="Equalizzatore"><i class="bi bi-sliders"></i></button>
-                <button id="fullscreen-btn" class="fullscreen-btn" title="Now Playing"><i class="bi bi-fullscreen"></i></button>
+                <button id="fullscreen-btn"         class="action-btn" title="Now Playing"><i class="bi bi-arrows-fullscreen"></i></button>
             </div>
         </div>
 
@@ -235,8 +282,8 @@
 
     <audio id="audio-player" src=""></audio>
 
-    <footer class="footer">
-        <p>Â© 2024 Minerify - Tutti i diritti riservati</p>
+    <footer class="footer" style="display: none;">
+        <p>© 2025 Minerify - Tutti i diritti riservati</p>
     </footer>
 
     <!-- Modal login richiesto -->
@@ -300,9 +347,9 @@
         });
     </script>
 
-    <script src="playlist.js?v=2"></script>
-    <script src="modal_playlist.js?v=4"></script>
-<!-- ===== MODALE FULLSCREEN NOW PLAYING ===== -->
+    <script src="playlist.js?v=3"></script>
+    <script src="modal_playlist.js?v=5"></script>
+    <!-- ===== MODALE FULLSCREEN NOW PLAYING ===== -->
     <div id="nowplaying-modal" class="nowplaying-modal">
         <div class="nowplaying-bg" id="nowplaying-bg"></div>
         <div class="nowplaying-inner">
@@ -329,7 +376,7 @@
                     <button id="np-prev" class="np-btn" title="Precedente"><i class="bi bi-skip-start-fill"></i></button>
                     <button id="np-play-pause" class="np-btn np-play" title="Play/Pausa"><i class="bi bi-play-fill"></i></button>
                     <button id="np-next" class="np-btn" title="Successivo"><i class="bi bi-skip-end-fill"></i></button>
-                    <button id="np-like" class="np-btn np-like-btn" title="Mi piace">ðŸ¤</button>
+                    <button id="np-like" class="np-btn np-like-btn" title="Mi piace">🤍</button>
                 </div>
                 <!-- Visualizzatore audio -->
                 <canvas id="nowplaying-visualizer" class="nowplaying-visualizer"></canvas>
@@ -361,8 +408,30 @@
                         <small>Controlla la connessione internet</small>
                     </div>
                 </div>
-            </div>
+        </div>
+    </div>
 
+    <script>
+        // Hamburger Menu
+        const hamburgerMenu = document.querySelector('.hamburger-menu');
+        const nav = document.querySelector('.nav');
+
+        hamburgerMenu.addEventListener('click', () => {
+            nav.classList.toggle('nav--open');
+            hamburgerMenu.classList.toggle('is-active');
+            hamburgerMenu.setAttribute('aria-expanded',
+                hamburgerMenu.classList.contains('is-active')
+            );
+        });
+
+        // Chiudi il menu quando si clicca su un link
+        document.querySelectorAll('.nav a').forEach(link => {
+            link.addEventListener('click', () => {
+                nav.classList.remove('nav--open');
+                hamburgerMenu.classList.remove('is-active');
+                hamburgerMenu.setAttribute('aria-expanded', 'false');
+            });
+        });
+    </script>
 </body>
 </html>
-

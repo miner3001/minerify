@@ -11,27 +11,44 @@
      <link rel="icon" href="img/spotifyLogo.jpg" type="image/x-icon">
 </head>
 <body>
-
 <header>
-    <h1>Minerify</h1>
     <button class="hamburger-menu" aria-label="Menu" aria-expanded="false">
         <span class="hamburger-line"></span>
         <span class="hamburger-line"></span>
         <span class="hamburger-line"></span>
     </button>
 </header>
-
 <nav class="nav">
-    <a href="accesso_pagina/accedi/accedi.html"><i class="bi bi-box-arrow-in-right"></i> Accedi</a>
+    <a href="index.html" class="active"><i class="bi bi-house-door"></i> Home</a>
     <a href="music_page/scopri.html"><i class="bi bi-compass"></i> Scopri</a>
     <a href="music_page/playlist.html"><i class="bi bi-collection-play"></i> La tua libreria</a>
     <a href="pagamento/premium.html"><i class="bi bi-gem"></i> Premium</a>
 </nav>
-
 <main class="content">
-    <h2>Ascolta la tua musica preferita</h2>
-    <p>Scopri milioni di brani e podcast, dove e quando vuoi.</p>
-    <a href="accesso_pagina/accedi/accedi.html" class="button">Inizia ora</a>
+    <div class="hero-text">
+        <h1 class="brand-title">Minerify</h1>
+        <h2>Ascolta la tua musica preferita</h2>
+        <p>Scopri i brani dai migliori artisti e podcast, dove e quando vuoi.</p>
+        <a href="accesso_pagina/accedi/accedi.html" class="button">Inizia ora</a>
+    </div>
+
+    <div class="features">
+        <div class="feature-card">
+            <i class="bi bi-music-note-list feature-icon"></i>
+            <h3>Dai Migliori Artisti</h3>
+            <p>Ascolta la musica dei tuoi artisti preferiti e scopri nuovi talenti ogni giorno.</p>
+        </div>
+        <div class="feature-card">
+            <i class="bi bi-phone feature-icon"></i>
+            <h3>Ovunque tu sia</h3>
+            <p>Ascolta la tua musica preferita su computer, smartphone o tablet.</p>
+        </div>
+        <div class="feature-card">
+            <i class="bi bi-headphones feature-icon"></i>
+            <h3>Alta Qualità</h3>
+            <p>Goditi un audio cristallino e senza interruzioni con i nostri piani premium.</p>
+        </div>
+    </div>
 </main>
 
 <footer class="footer">
@@ -39,20 +56,15 @@
 </footer>
 
 <div class="stars"></div>
-
 <script>
-        const hamburgerMenu = document.querySelector('.hamburger-menu');
-        const nav = document.querySelector('.nav');
-
+    const hamburgerMenu = document.querySelector('.hamburger-menu');
+    const nav = document.querySelector('.nav');
+    if (hamburgerMenu && nav) {
         hamburgerMenu.addEventListener('click', () => {
             nav.classList.toggle('nav--open');
             hamburgerMenu.classList.toggle('is-active');
-            hamburgerMenu.setAttribute('aria-expanded', 
-                hamburgerMenu.classList.contains('is-active')
-            );
+            hamburgerMenu.setAttribute('aria-expanded', hamburgerMenu.classList.contains('is-active'));
         });
-
-        // Chiudi il menu quando si clicca su un link
         document.querySelectorAll('.nav a').forEach(link => {
             link.addEventListener('click', () => {
                 nav.classList.remove('nav--open');
@@ -60,6 +72,7 @@
                 hamburgerMenu.setAttribute('aria-expanded', 'false');
             });
         });
-    </script>
+    }
+</script>
 </body>
 </html>

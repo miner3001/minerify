@@ -14,6 +14,8 @@
 
 <body>
 
+    <div class="stars"></div>
+
     <header>
         <h1>Minerify</h1>
         <button class="hamburger-menu" aria-label="Menu" aria-expanded="false">
@@ -26,48 +28,69 @@
         <a href="../index.html"><i class="bi bi-house-door"></i> Home</a>
         <a href="../music_page/scopri.html"><i class="bi bi-compass"></i> Scopri</a>
         <a href="../music_page/playlist.html"><i class="bi bi-collection-play"></i> La tua libreria</a>
-        <a href="../pagamento/premium.html"><i class="bi bi-gem"></i> Premium</a>
+        <a href="premium.html" class="active"><i class="bi bi-gem"></i> Premium</a>
     </nav>
 
+    <div class="hero">
+        <h1 class="hero-title">Ascolta senza limiti.</h1>
+        <p class="hero-subtitle">Musica senza pubblicità, ascolto offline e qualità audio superiore.<br>Scegli il piano perfetto per te.</p>
+    </div>
 
     <div class="content">
-        <h2>Scopri i vantaggi di Minerify Premium</h2>
-        <p>Accedi a musica senza pubblicità, ascolta offline e molto altro ancora.</p>
+        <div class="plans-grid">
+            
+            <!-- Piano Premium -->
+            <div class="plan-card">
+                <div class="plan-badge">Più Scelto</div>
+                <h2>Individual</h2>
+                <div class="price">€9.99<span>/mese</span></div>
+                <p>Il piano perfetto per goderti la tua musica senza interruzioni in qualsiasi momento.</p>
+                <ul class="features-list">
+                    <li><i class="bi bi-check-circle-fill"></i> Musica senza pubblicità</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Ascolto offline ovunque</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Audio in altissima qualità</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Riproduzione on-demand</li>
+                </ul>
+                <a href="pagamento.html?plan=individual" class="plan-button">Inizia ora</a>
+            </div>
 
-        <!-- Piano Premium -->
-        <div class="plan">
-            <h2>Minerify Premium</h2>
-            <p>Goditi la tua musica senza interruzioni, con la possibilità di ascoltare offline e in qualità migliore.
-            </p>
-            <div class="price">€9.99/mese</div>
-            <a href="pagamento.html" class="button">Inizia ora</a>
+            <!-- Piano Premium Family -->
+            <div class="plan-card family">
+                <h2>Family</h2>
+                <div class="price">€14.99<span>/mese</span></div>
+                <p>Condividi la magia della musica con chi ami. Fino a 6 account indipendenti.</p>
+                <ul class="features-list">
+                    <li><i class="bi bi-check-circle-fill"></i> 6 account Premium separati</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Playlist Family Mix</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Filtro contenuti espliciti</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Nessuna pubblicità</li>
+                </ul>
+                <a href="pagamento.html?plan=family" class="plan-button">Inizia ora</a>
+            </div>
+
+            <!-- Piano Premium Student -->
+            <div class="plan-card student">
+                <h2>Student</h2>
+                <div class="price">€4.99<span>/mese</span></div>
+                <p>Riservato agli studenti universitari idonei. Premium a metà prezzo per lo studio.</p>
+                <ul class="features-list">
+                    <li><i class="bi bi-check-circle-fill"></i> Sconto speciale studenti</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Musica senza pubblicità</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Ascolto offline</li>
+                    <li><i class="bi bi-check-circle-fill"></i> Rinnovo annuale scontato</li>
+                </ul>
+                <a href="pagamento.html?plan=student" class="plan-button">Verifica idoneità</a>
+            </div>
+
         </div>
 
-        <!-- Piano Premium Family -->
-        <div class="plan">
-            <h2>Minerify Premium Family</h2>
-            <p>Condividi l'abbonamento con la tua famiglia (fino a 6 account) e goditi musica senza interruzioni.</p>
-            <div class="price">€14.99/mese</div>
-            <a href="pagamento.html" class="button">Inizia ora</a>
-        </div>
-
-        <!-- Piano Premium Student -->
-        <div class="plan">
-            <h2>Minerify Premium Student</h2>
-            <p>Se sei uno studente, ottieni un abbonamento Premium a metà prezzo.</p>
-            <div class="price">€4.99/mese</div>
-            <button class="button">Verifica se sei idoneo</button>
-        </div>
-
-        <p style="margin-top: 30px; font-size: 1.2em;">Non sei ancora pronto? <a href="../music_page/scopri.html"
-                style="color: #1DB954;">Prova Minerify Free</a></p>
+        <p class="disclaimer">Non sei ancora pronto? <a href="../music_page/scopri.html">Torna ad ascoltare Minerify Free</a></p>
     </div>
 
     <footer class="footer">
         <p>© 2024 Minerify - Tutti i diritti riservati</p>
     </footer>
 
-    <div class="stars"></div>
     <script>
         // Hamburger Menu
         const hamburgerMenu = document.querySelector('.hamburger-menu');
@@ -90,8 +113,5 @@
             });
         });
     </script>
-    <script src="premium_player.js"></script>
-    <audio id="audio-player"></audio>
-
 </body>
 </html>
